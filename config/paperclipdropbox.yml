@@ -1,0 +1,6 @@
+development:
+  path: "/development/:attachment/:id/:style/:filename"
+test:
+  path: "/test/:attachment/:id/:style/:filename"
+production:
+  path: "/production/:attachment/:id/:style/:filename"

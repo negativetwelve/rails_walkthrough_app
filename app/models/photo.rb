@@ -5,5 +5,5 @@ class Photo < ActiveRecord::Base
   has_attached_file :image,
                     styles: { medium: "300x300>", thumb: "100x100>" },
                     storage: :Dropboxstorage,
-                    path: "/:attachment/:attachment/:id/:style/:filename"
+                    path: "/#{Rails.env}/:attachment/:id/:style/:filename"
 end

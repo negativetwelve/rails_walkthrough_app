@@ -1,13 +1,46 @@
+<% if signed_in? %>
+<div class="row-fluid">
+  <div class="span12" id="home-main-content">
+    <div class="span2 column" id="left_column">
+      <%= current_user.name %>
+      <ul class="nav nav-list column_nav">
+        <li class="nav-header">Favorites</li>
+        <li class="active"><a href="#">News Feed</a></li>
+        <li><a href="#">Messages</a></li>
+        <li><a href="#">Photos</a></li>
+      </ul>
+    </div>
+    
+    <div class="span7 column" id="middle_column">
+   
+    </div>
+    
+    <div class="span3 column" id="right_column">
+    
+    </div>
+    
+  </div>
+</div>
+<% else %>
 <div class="container-fluid" id="home-main">
   <div class="row-fluid">
     <div class="span6 offset3" id="login">
       <div id="top-heading">
         <h3>Rails Walkthrough App</h3>
         <h5>Connect and share what matters most to you.</h5>
-        
-        <%= link_to 'Create Account', signup_path %>
-        
+        <%= form_for(:session, url: sessions_path) do |f| %>
+
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+
+          <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+        <% end %>
+        <p><%= link_to 'Create Account', signup_path %></p>
       </div>
     </div>
   </div>  
 </div>
+<% end %>

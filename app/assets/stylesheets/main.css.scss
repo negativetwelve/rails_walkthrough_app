@@ -1,12 +1,29 @@
 $dark_blue: #20315B;
 $blue: #2E4993;
+$medium_blue: #3b5998;
 $light_blue: #D8DFEA;
+$highlight_blue: #D8DFEA;
 $white: #ffffff;
+$transparent_white: rgba(255, 255, 255, 0.25);
+$black_text: #222222;
+
+$navbarHeight: 37px;
+$navbarBackground: $medium_blue;
+$navbarBackgroundHighlight: $medium_blue;
+$navbarText: $white;
+$navbarBrandColor: $white;
+$navbarLinkColor: $white;
+$navbarLinkColorHover: $white;
+$navbarLinkColorActive: $white;
+$navbarLinkBackgroundActive: $navbarBackground;
+$navbarLinkBackgroundHover: $transparent_white;
+$dropdownLinkBackgroundHover: $medium_blue;
 
 @import "bootstrap";
 
 body, html {
   height: 100%;
+  font-size: 11px;
 }
 
 #home-main {
@@ -32,4 +49,32 @@ body, html {
     }
 
   }
+}
+
+.column {
+  word-wrap: break-word;
+}
+
+#home-main-content {
+  padding-top: 37px;
+}
+
+#left_column {
+  .column_nav .active a,
+  .column_nav .active a:hover {
+      background-color: $highlight_blue;
+      color: $black_text;
+  }
+  
+  .column_nav a, .column_nav a:hover {
+    color: $black_text;
+  }
+}
+
+#middle_column {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 0 15px;
+  min-height: 700px;
+  font-size: 13px;
 }

@@ -1,0 +1,6 @@
+<div class="row-fluid">
+  <div class="span10 has_header">
+    <%= image_tag @user.photos.try(:first).try(:image).try(:url, :medium) %>
+    <%= @user.name %>
+  </div>
+</div>

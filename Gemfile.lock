@@ -189,6 +189,7 @@ DEPENDENCIES
   database_cleaner (= 0.7.0)
   factory_girl_rails (= 4.1.0)
   jquery-rails (= 2.1.4)
+  paperclip
   paperclipdropbox
   pg (= 0.14.1)
   rails (= 3.2.9)

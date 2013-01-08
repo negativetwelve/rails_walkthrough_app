@@ -3,6 +3,7 @@ RailsWalkthroughApp::Application.routes.draw do
   
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :photos
   
   match '/signup', to: 'users#new'
   match '/login',  to: 'sessions#new'

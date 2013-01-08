@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   has_secure_password
   
+  has_many :photos, dependent: :destroy
+  
   validates :first_name, presence: true, length: {maximum: 30}
   validates :last_name, presence: true, length: {maximum: 30}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

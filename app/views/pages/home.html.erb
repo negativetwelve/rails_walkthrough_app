@@ -1,6 +1,6 @@
 <% if signed_in? %>
 <div class="row-fluid">
-  <div class="span12" id="home-main-content">
+  <div class="span12 has_header" id="home-main-content">
     <div class="span2 column" id="left_column">
       <%= current_user.name %>
       <ul class="nav nav-list column_nav">
@@ -12,7 +12,10 @@
     </div>
     
     <div class="span7 column" id="middle_column">
-   
+      <%= form_for @photo, :html => { :multipart => true } do |f| %>
+        <%= f.file_field :image %>
+        <%= f.submit "Upload Photo", class: "btn btn-primary" %>
+      <% end %>
     </div>
     
     <div class="span3 column" id="right_column">

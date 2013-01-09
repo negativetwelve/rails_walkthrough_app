@@ -80,7 +80,7 @@
                   <h5><%= link_to event.user.name, event.user, class: 'event-user-name' %></h5>
                   <% if event.kind == 'status' %>
                     <div class="event-content">
-                      <%= event.body %>
+                      <h5><%= event.body %></h5>
                     </div>
                   <% end %>
                   <span class="action-bar">

@@ -88,8 +88,19 @@
                     <div class="event-comments">
                       <ul class="comments-list">
                         <li>Mark Miyashita likes this.</li>
-                        <li>Hi!</li>
-                        <li></li>
+                        <% event.comments.each do |comment| %>
+                          <li>
+                            <%= image_tag comment.user.profile_picture, size: '32x32' %>
+                            <%= comment.body %>
+                          </li>
+                        <% end %>
+                        <li>
+                          <%= form_for Event.new do |f| %>
+                            <%= f.text_field :body, placeholder: "Write a comment..." %>
+                            <%= hidden_field_tag :kind, 'comment' %>
+                            <%= hidden_field_tag :parent_event_id, event.id %>
+                          <% end %>
+                        </li>
                       </ul>
                     </div>
                   </span>

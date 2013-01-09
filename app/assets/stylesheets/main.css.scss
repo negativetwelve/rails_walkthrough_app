@@ -4,6 +4,7 @@ $medium_blue: #3b5998;
 $light_blue: #D8DFEA;
 $highlight_blue: #D8DFEA;
 $icon_blue: #1C2F79;
+$comment_blue: #F1F2F6;
 $white: #ffffff;
 $transparent_white: rgba(255, 255, 255, 0.25);
 $black_text: #222222;
@@ -28,6 +29,10 @@ $home_page_column_padding: 20px;
 body, html {
   height: 100%;
   font-size: 11px;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .hidden {
@@ -112,6 +117,36 @@ body, html {
               line-height: 1.38;
               font-weight: normal;
               margin: 0 0 5px 0;
+            }
+            
+            .event-user-name {
+              font-weight: bold;
+            }
+            
+            .event-comments {
+              .comments-list {
+                .comment-wrapper {
+                  background-color: $comment_blue;
+                  list-style: none;
+                  padding: 4px;
+                  margin-top: 1px;
+                  font-size: 11px;
+                  
+                  .comment-profile-picture {
+                    float: left;
+                    margin-right: 8px;
+                  }
+                  
+                  .comment-content {
+                    overflow: hidden;
+                    display: block;
+                    
+                    .comment-user-name {
+                      font-weight: bold;
+                    }
+                  }
+                }
+              }
             }
           }
         }

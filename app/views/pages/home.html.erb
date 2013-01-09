@@ -77,7 +77,7 @@
             <div class="user-event-inner">
               <div class="event-inner-wrapper">
                 <div class="main-event-content">
-                  <h5><%= link_to event.user.name, event.user %></h5>
+                  <h5><%= link_to event.user.name, event.user, class: 'event-user-name' %></h5>
                   <% if event.kind == 'status' %>
                     <div class="event-content">
                       <%= event.body %>
@@ -85,25 +85,38 @@
                   <% end %>
                   <span class="action-bar">
                     Like - Comment - Share
-                    <div class="event-comments">
-                      <ul class="comments-list">
-                        <li>Mark Miyashita likes this.</li>
-                        <% event.comments.each do |comment| %>
-                          <li>
-                            <%= image_tag comment.user.profile_picture, size: '32x32' %>
-                            <%= comment.body %>
-                          </li>
-                        <% end %>
-                        <li>
-                          <%= form_for Event.new do |f| %>
-                            <%= f.text_field :body, placeholder: "Write a comment..." %>
-                            <%= hidden_field_tag :kind, 'comment' %>
-                            <%= hidden_field_tag :parent_event_id, event.id %>
-                          <% end %>
-                        </li>
-                      </ul>
-                    </div>
                   </span>
+                  <div class="event-comments">
+                    <ul class="comments-list">
+                      <li>Mark Miyashita likes this.</li>
+                      <% event.comments.each do |comment| %>
+                        <li class="comment-wrapper">
+                          <%= link_to image_tag(comment.user.profile_picture, size: '32x32'), comment.user, class: 'comment-profile-picture' %>
+                          <div class="comment-content">
+                            <div class="comment-user-info">
+                              <%= link_to comment.user.name, comment.user, class: 'comment-user-name' %>
+                              <span class="comment-text">
+                                <%= comment.body %>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="comment-actions">
+                            <span class="comment-date">
+                              <%= time_ago_in_words(comment.created_at) %> ago
+                            </span>
+                            <%= link_to 'Like', '#' %>
+                          </div>
+                        </li>
+                      <% end %>
+                      <li class="comment-wrapper">
+                        <%= form_for Event.new do |f| %>
+                          <%= f.text_field :body, placeholder: "Write a comment..." %>
+                          <%= hidden_field_tag :kind, 'comment' %>
+                          <%= hidden_field_tag :parent_event_id, event.id %>
+                        <% end %>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

@@ -20,7 +20,7 @@
       
         <div class="update_form" id="status_update_form">
           <%= form_for Event.new do |f| %>
-            <%= f.text_field :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()" %>
+            <%= f.text_field :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", class: 'span12' %>
             <%= hidden_field_tag :kind, 'status' %>
             <%= f.submit "Post", class: "btn btn-large btn-primary hidden", id: "status_submit_button" %>
           <% end %>
@@ -84,11 +84,18 @@
                     </div>
                   <% end %>
                   <span class="action-bar">
-                    Like - Comment - Share
+                    <span class="actions">
+                      <%= link_to 'Like', '#' %>
+                      <%= link_to 'Comment', '#' %>
+                      <%= link_to 'Share', '#' %>
+                    </span>
+                    <span class="event-time">
+                      <%= time_ago_in_words(event.created_at) %>
+                    </span>
                   </span>
                   <div class="event-comments">
                     <ul class="comments-list">
-                      <li>Mark Miyashita likes this.</li>
+                      <li class="comment-wrapper">Mark Miyashita likes this.</li>
                       <% event.comments.each do |comment| %>
                         <li class="comment-wrapper">
                           <%= link_to image_tag(comment.user.profile_picture, size: '32x32'), comment.user, class: 'comment-profile-picture' %>
@@ -109,8 +116,9 @@
                         </li>
                       <% end %>
                       <li class="comment-wrapper">
+                        <%= image_tag current_user.profile_picture, size: '32x32', class: 'comment-profile-picture' %>
                         <%= form_for Event.new do |f| %>
-                          <%= f.text_field :body, placeholder: "Write a comment..." %>
+                          <%= f.text_field :body, placeholder: "Write a comment...", class: 'span11' %>
                           <%= hidden_field_tag :kind, 'comment' %>
                           <%= hidden_field_tag :parent_event_id, event.id %>
                         <% end %>

@@ -31,6 +31,14 @@ body, html {
   font-size: 11px;
 }
 
+body {
+  line-height: 1.28;
+}
+
+li {
+  line-height: 1.28;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -69,10 +77,14 @@ a:hover {
 }
 
 .navbar {
+  line-height: 20px;
+  
   .navbar-inner {
     .container-fluid {
       .nav {
         li {
+          line-height: 20px;
+          
           .link-icons {
             padding-left: 7px;
             padding-right: 7px;
@@ -119,6 +131,16 @@ a:hover {
               margin: 0 0 5px 0;
             }
             
+            .event-content {
+              font-size: 13px;
+              line-height: 1.38;
+            }
+            
+            .action-bar {
+              font-size: 11px;
+              line-height: 1.28;
+            }
+            
             .event-user-name {
               font-weight: bold;
             }
@@ -143,6 +165,17 @@ a:hover {
                     
                     .comment-user-name {
                       font-weight: bold;
+                    }
+                  }
+                  
+                  .comment-actions {
+                    margin-top: 2px;
+                  }
+                  form.new_event {
+                    margin: 0;
+                    
+                    #event_body {
+                      margin-bottom: 0;
                     }
                   }
                 }

@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:negativetwelve/jquery-fileupload-rails.git
+  remote: git://github.com/negativetwelve/jquery-fileupload-rails.git
   revision: 0f6d09f3498e3d69e15b25566054894bfdfa7354
   specs:
     jquery-fileupload-rails (0.4.0)

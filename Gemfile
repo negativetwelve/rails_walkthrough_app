@@ -8,7 +8,7 @@ gem 'jquery-rails', '2.1.4'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'paperclip'
 gem 'paperclipdropbox'
-gem 'jquery-fileupload-rails', :git =>  'git@github.com:negativetwelve/jquery-fileupload-rails.git'
+gem 'jquery-fileupload-rails', :git =>  'git://github.com/negativetwelve/jquery-fileupload-rails.git'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

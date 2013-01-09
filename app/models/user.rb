@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_secure_password
   
   has_many :photos, dependent: :destroy
+  has_many :events
   
   validates :first_name, presence: true, length: {maximum: 30}
   validates :last_name, presence: true, length: {maximum: 30}

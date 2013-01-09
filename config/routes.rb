@@ -6,6 +6,7 @@ RailsWalkthroughApp::Application.routes.draw do
   end
   
   resources :sessions, only: [:new, :create, :destroy]
+  resources :events, only: [:new, :create, :destroy]
   
   match '/signup', to: 'users#new'
   match '/login',  to: 'sessions#new'

@@ -7,6 +7,7 @@ $icon_blue: #1C2F79;
 $white: #ffffff;
 $transparent_white: rgba(255, 255, 255, 0.25);
 $black_text: #222222;
+$gray_border: #E9E9E9;
 
 $navbarHeight: 37px;
 $navbarBackground: $medium_blue;
@@ -78,6 +79,47 @@ body, html {
   }
 }
 
+.feed-items-all {
+  .feed-items {
+    margin: 0;
+    
+    .event-box {
+      list-style: none;
+      display: block;
+      padding-left: 15px;
+      border-bottom: 1px solid $gray_border;
+      
+      .user-picture {
+        float: left;
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+      
+      .user-event-inner {
+        margin-left: 60px;
+        display: block;
+        
+        .event-inner-wrapper {
+          padding-top: 16px;
+          margin-bottom: 16px;
+          margin-right: 35px;
+          
+          .main-event-content {
+            display: block;
+            
+            h5 {
+              font-size: 13px;
+              line-height: 1.38;
+              font-weight: normal;
+              margin: 0 0 5px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .has_header {
   padding-top: 37px;
 }
@@ -100,10 +142,13 @@ body, html {
   padding-top: $home_page_column_padding;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  padding-left: 15px;
   padding-right: 15px;
   min-height: 700px;
   font-size: 13px;
+  
+  #home_page_update {
+    padding-left: 15px;
+  }
 }
 
 #right_column {

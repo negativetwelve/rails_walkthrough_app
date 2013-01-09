@@ -15,11 +15,15 @@
     <div class="span7 column" id="middle_column">
       
       <div id="home_page_update">
-        <a id="show_status" href="#">Update Status</a>
-        <a id="show_photo_upload" href="#">Add Photos</a>
+        <a id="show_status" href="#" onclick="show_status()">Update Status</a>
+        <a id="show_photo_upload" href="#" onclick="show_uploader()">Add Photos</a>
       
         <div class="update_form" id="status_update_form">
-          Post a status update.
+          <%= form_for Event.new do |f| %>
+            <%= f.text_field :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()" %>
+            <%= hidden_field_tag :kind, 'status' %>
+            <%= f.submit "Post", class: "btn btn-large btn-primary hidden", id: "status_submit_button" %>
+          <% end %>
         </div>
       
         <div class="update_form hidden" id="upload_photos_form">
@@ -65,6 +69,38 @@
         </div>
       </div>
       
+      <div class="feed-items-all">
+        <ul class="feed-items">
+        <% @events.each do |event| %>
+          <li class="event-box">
+            <%= link_to image_tag(event.user.profile_picture, size: '50x50'), event.user, class: 'user-picture' %>
+            <div class="user-event-inner">
+              <div class="event-inner-wrapper">
+                <div class="main-event-content">
+                  <h5><%= link_to event.user.name, event.user %></h5>
+                  <% if event.kind == 'status' %>
+                    <div class="event-content">
+                      <%= event.body %>
+                    </div>
+                  <% end %>
+                  <span class="action-bar">
+                    Like - Comment - Share
+                    <div class="event-comments">
+                      <ul class="comments-list">
+                        <li>Mark Miyashita likes this.</li>
+                        <li>Hi!</li>
+                        <li></li>
+                      </ul>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+      
       
     </div>
     
@@ -101,15 +137,19 @@
 <% end %>
 
 <script>
-  $("#home_page_update #show_status").click(function() {
+  function show_status() {
     $('#home_page_update .update_form').hide();
     $('#home_page_update #status_update_form').show();
-  });
+  };
   
-  $('#home_page_update #show_photo_upload').click(function() {
+  function show_uploader() {
     $('#home_page_update .update_form').hide();
     $('#home_page_update #upload_photos_form').show();
-  });
+  };
+  
+  function show_status_submit() {
+    $('#home_page_update #status_update_form #status_submit_button').show();
+  };
 </script>
 
 <script>

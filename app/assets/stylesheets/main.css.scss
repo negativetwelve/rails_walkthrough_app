@@ -3,6 +3,7 @@ $blue: #2E4993;
 $medium_blue: #3b5998;
 $light_blue: #D8DFEA;
 $highlight_blue: #D8DFEA;
+$icon_blue: #1C2F79;
 $white: #ffffff;
 $transparent_white: rgba(255, 255, 255, 0.25);
 $black_text: #222222;
@@ -19,11 +20,17 @@ $navbarLinkBackgroundActive: $navbarBackground;
 $navbarLinkBackgroundHover: $transparent_white;
 $dropdownLinkBackgroundHover: $medium_blue;
 
+$home_page_column_padding: 20px;
+
 @import "bootstrap";
 
 body, html {
   height: 100%;
   font-size: 11px;
+}
+
+.hidden {
+  display: none;
 }
 
 #home-main {
@@ -55,11 +62,29 @@ body, html {
   word-wrap: break-word;
 }
 
+.navbar {
+  .navbar-inner {
+    .container-fluid {
+      .nav {
+        li {
+          .link-icons {
+            padding-left: 7px;
+            padding-right: 7px;
+            color: $light_blue;
+          }
+        }
+      }
+    }
+  }
+}
+
 .has_header {
   padding-top: 37px;
 }
 
 #left_column {
+  padding-top: $home_page_column_padding;
+  
   .column_nav .active a,
   .column_nav .active a:hover {
       background-color: $highlight_blue;
@@ -72,9 +97,15 @@ body, html {
 }
 
 #middle_column {
+  padding-top: $home_page_column_padding;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  padding: 0 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   min-height: 700px;
   font-size: 13px;
+}
+
+#right_column {
+  padding-top: $home_page_column_padding;
 }

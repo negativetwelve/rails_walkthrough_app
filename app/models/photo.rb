@@ -9,13 +9,13 @@ class Photo < ActiveRecord::Base
   
   include Rails.application.routes.url_helpers
   
-  def to_jquery
+  def to_jquery(user)
     {
       name: read_attribute(:image_file_name),
       size: read_attribute(:image_file_size),
       url: image.url(:original),
       thumbnail_url: image.url(:thumb),
-      delete_url: photo_path(self),
+      delete_url: user_photo_path(user, self),
       delete_type: 'DELETE'
     }
   end

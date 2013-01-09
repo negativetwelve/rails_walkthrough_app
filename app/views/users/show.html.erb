@@ -1,8 +1,5 @@
 <div class="row-fluid">
   <div class="span10 has_header">
-    <% @user.photos.each do |photo| %>
-      <%= image_tag photo.image.url(:medium) %>
-    <% end %>
     <%= @user.name %>
   </div>
 </div>

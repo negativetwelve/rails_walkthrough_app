@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
+  def profile_picture
+    photos.first.image.url
+  end
+  
   private
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64

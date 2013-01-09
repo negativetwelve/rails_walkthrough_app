@@ -9,6 +9,7 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'paperclip'
 gem 'paperclipdropbox'
 gem 'jquery-fileupload-rails', :git =>  'git://github.com/negativetwelve/jquery-fileupload-rails.git'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

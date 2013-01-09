@@ -2,55 +2,70 @@
 <div class="row-fluid">
   <div class="span12 has_header" id="home-main-content">
     <div class="span2 column" id="left_column">
+      <%= image_tag current_user.profile_picture, size: '50x50' %>
       <%= current_user.name %>
       <ul class="nav nav-list column_nav">
         <li class="nav-header">Favorites</li>
         <li class="active"><a href="#">News Feed</a></li>
         <li><a href="#">Messages</a></li>
-        <li><a href="#">Photos</a></li>
+        <li><%= link_to 'Photos', user_photos_path(current_user) %></li>
       </ul>
     </div>
     
     <div class="span7 column" id="middle_column">
-      <h2>Upload file</h2>
-      <%= form_for Photo.new, :url => photos_path, :method => 'POST', :html => { :multipart => true, :id => "fileupload"  } do |f| %>
-        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-        <div class="row fileupload-buttonbar">
-          <div class="span7">
-            <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-success fileinput-button">
-              <i class="icon-plus icon-white"></i>
-              <span>Add files...</span>
-              <%= f.file_field :image %>
-            </span>
-            <button type="submit" class="btn btn-primary start">
-              <i class="icon-upload icon-white"></i>
-              <span>Start upload</span>
-            </button>
-            <button type="reset" class="btn btn-warning cancel">
-              <i class="icon-ban-circle icon-white"></i>
-              <span>Cancel upload</span>
-            </button>
-            <button type="button" class="btn btn-danger delete">
-              <i class="icon-trash icon-white"></i>
-              <span>Delete</span>
-            </button>
-            <input type="checkbox" class="toggle">
-          </div>
-          <div class="span5">
-            <!-- The global progress bar -->
-            <div class="progress progress-success progress-striped active fade">
-              <div class="bar" style="width:0%;"></div>
-            </div>
-          </div>
+      
+      <div id="home_page_update">
+        <a id="show_status" href="#">Update Status</a>
+        <a id="show_photo_upload" href="#">Add Photos</a>
+      
+        <div class="update_form" id="status_update_form">
+          Post a status update.
         </div>
-        <!-- The loading indicator is shown during image processing -->
-        <div class="fileupload-loading"></div>
-        <br>
-        <!-- The table listing the files available for upload/download -->
-        <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
-        </table>
-      <% end %>
+      
+        <div class="update_form hidden" id="upload_photos_form">
+          <h2>Upload Photos</h2>
+          <%= form_for Photo.new, :url => user_photos_path(current_user), :method => 'POST', :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+            <div class="row-fluid fileupload-buttonbar">
+              <div class="span7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                  <i class="icon-plus icon-white"></i>
+                  <span>Add files...</span>
+                  <%= f.file_field :image %>
+                </span>
+                <button type="submit" class="btn btn-primary start">
+                  <i class="icon-upload icon-white"></i>
+                  <span>Start upload</span>
+                </button>
+                <button type="reset" class="btn btn-warning cancel">
+                  <i class="icon-ban-circle icon-white"></i>
+                  <span>Cancel upload</span>
+                </button>
+                <button type="button" class="btn btn-danger delete">
+                  <i class="icon-trash icon-white"></i>
+                  <span>Delete</span>
+                </button>
+                <input type="checkbox" class="toggle">
+              </div>
+              <div class="span5">
+                <!-- The global progress bar -->
+                <div class="progress progress-success progress-striped active fade">
+                  <div class="bar" style="width:0%;"></div>
+                </div>
+              </div>
+            </div>
+            <!-- The loading indicator is shown during image processing -->
+            <div class="fileupload-loading"></div>
+            <br>
+            <!-- The table listing the files available for upload/download -->
+            <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+            </table>
+          <% end %>
+        </div>
+      </div>
+      
+      
     </div>
     
     <div class="span3 column" id="right_column">
@@ -84,6 +99,18 @@
   </div>  
 </div>
 <% end %>
+
+<script>
+  $("#home_page_update #show_status").click(function() {
+    $('#home_page_update .update_form').hide();
+    $('#home_page_update #status_update_form').show();
+  });
+  
+  $('#home_page_update #show_photo_upload').click(function() {
+    $('#home_page_update .update_form').hide();
+    $('#home_page_update #upload_photos_form').show();
+  });
+</script>
 
 <script>
   var fileUploadErrors = {

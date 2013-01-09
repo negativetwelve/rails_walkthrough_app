@@ -1,9 +1,11 @@
 RailsWalkthroughApp::Application.routes.draw do
   root to: 'pages#home'
   
-  resources :users
+  resources :users do
+    resources :photos
+  end
+  
   resources :sessions, only: [:new, :create, :destroy]
-  resources :photos
   
   match '/signup', to: 'users#new'
   match '/login',  to: 'sessions#new'

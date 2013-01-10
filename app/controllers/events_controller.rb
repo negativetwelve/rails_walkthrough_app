@@ -15,11 +15,10 @@ class EventsController < ApplicationController
       @event.parent_event_id = params[:parent_event_id].to_i
     end
     
-    if @event.save
-      flash[:success] = 'Status update posted!'
-      redirect_to root_path
-    else
-      render 'new'
+    respond_to do |format|    
+      if @event.save
+        format.js
+      end
     end
   end
 end

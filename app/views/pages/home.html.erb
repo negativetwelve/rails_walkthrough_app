@@ -19,8 +19,8 @@
         <a id="show_photo_upload" href="#" onclick="show_uploader()">Add Photos</a>
       
         <div class="update_form" id="status_update_form">
-          <%= form_for Event.new do |f| %>
-            <%= f.text_field :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", class: 'span12' %>
+          <%= form_for Event.new, remote: true do |f| %>
+            <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", class: 'span12 new_status' %>
             <%= hidden_field_tag :kind, 'status' %>
             <%= f.submit "Post", class: "btn btn-large btn-primary hidden", id: "status_submit_button" %>
           <% end %>
@@ -70,65 +70,9 @@
       </div>
       
       <div class="feed-items-all">
-        <ul class="feed-items">
+        <ul id="feed-items">
         <% @events.each do |event| %>
-          <li class="event-box">
-            <%= link_to image_tag(event.user.profile_picture, size: '50x50'), event.user, class: 'user-picture' %>
-            <div class="user-event-inner">
-              <div class="event-inner-wrapper">
-                <div class="main-event-content">
-                  <h5><%= link_to event.user.name, event.user, class: 'event-user-name' %></h5>
-                  <% if event.kind == 'status' %>
-                    <div class="event-content">
-                      <h5><%= event.body %></h5>
-                    </div>
-                  <% end %>
-                  <span class="action-bar">
-                    <span class="actions">
-                      <%= link_to 'Like', '#' %>
-                      <%= link_to 'Comment', '#' %>
-                      <%= link_to 'Share', '#' %>
-                    </span>
-                    <span class="event-time">
-                      <%= time_ago_in_words(event.created_at) %> ago
-                    </span>
-                  </span>
-                  <div class="event-comments">
-                    <ul class="comments-list">
-                      <li class="comment-wrapper">Mark Miyashita likes this.</li>
-                      <% event.comments.each do |comment| %>
-                        <li class="comment-wrapper">
-                          <%= link_to image_tag(comment.user.profile_picture, size: '32x32'), comment.user, class: 'comment-profile-picture' %>
-                          <div class="comment-content">
-                            <div class="comment-user-info">
-                              <%= link_to comment.user.name, comment.user, class: 'comment-user-name' %>
-                              <span class="comment-text">
-                                <%= comment.body %>
-                              </span>
-                            </div>
-                          </div>
-                          <div class="comment-actions">
-                            <span class="comment-date">
-                              <%= time_ago_in_words(comment.created_at) %> ago
-                            </span>
-                            <%= link_to 'Like', '#' %>
-                          </div>
-                        </li>
-                      <% end %>
-                      <li class="comment-wrapper">
-                        <%= image_tag current_user.profile_picture, size: '32x32', class: 'comment-profile-picture' %>
-                        <%= form_for Event.new do |f| %>
-                          <%= f.text_field :body, placeholder: "Write a comment...", class: 'span11' %>
-                          <%= hidden_field_tag :kind, 'comment' %>
-                          <%= hidden_field_tag :parent_event_id, event.id %>
-                        <% end %>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
+          <%= render 'events/status', event: event %>
         <% end %>
         </ul>
       </div>

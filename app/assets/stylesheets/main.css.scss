@@ -32,11 +32,20 @@ body, html {
 }
 
 body {
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
   line-height: 1.28;
+}
+
+p {
+  margin: 0px;
 }
 
 li {
   line-height: 1.28;
+}
+
+textarea {
+  padding: 3px;
 }
 
 a:hover {
@@ -45,6 +54,16 @@ a:hover {
 
 .hidden {
   display: none;
+}
+
+input[type=text], textarea {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0px !important;
 }
 
 #home-main {
@@ -97,12 +116,11 @@ a:hover {
 }
 
 .feed-items-all {
-  .feed-items {
+  #feed-items {
     margin: 0;
     
     .event-box {
       list-style: none;
-      display: block;
       padding-left: 15px;
       border-bottom: 1px solid $gray_border;
       
@@ -147,6 +165,8 @@ a:hover {
             
             .event-comments {
               .comments-list {
+                margin: 0px;
+                
                 .comment-wrapper {
                   background-color: $comment_blue;
                   list-style: none;
@@ -168,10 +188,18 @@ a:hover {
                     }
                   }
                   
+                  .comment-input {
+                    resize: none;
+                    height: 20px;
+                    font-size: 11px;
+                    line-height: 1.28;
+                  }
+                  
                   .comment-actions {
                     margin-top: 2px;
                   }
-                  form.new_event {
+                  
+                  form.new_comment_form {
                     margin: 0;
                     
                     #event_body {
@@ -216,6 +244,17 @@ a:hover {
   
   #home_page_update {
     padding-left: 15px;
+    
+    #status_update_form {
+        
+      .new_status {
+        resize: none;
+        font-size: 13px;
+        line-height: 1.28;
+        height: 16px;
+        padding: 7px 5px 5px 5px;
+      }
+    }
   }
 }
 

@@ -1,0 +1,17 @@
+<%= content_tag(:li, class: 'comment-wrapper') do %>
+  <%= link_to image_tag(comment.user.profile_picture, size: '32x32'), comment.user, class: 'comment-profile-picture' %>
+  <div class="comment-content">
+    <div class="comment-user-info">
+      <%= link_to comment.user.name, comment.user, class: 'comment-user-name' %>
+      <span class="comment-text">
+        <%= simple_format(comment.body) %>
+      </span>
+    </div>
+  </div>
+  <div class="comment-actions">
+    <span class="comment-date">
+      <%= time_ago_in_words(comment.created_at) %> ago
+    </span>
+    <%= link_to 'Like', '#' %>
+  </div>
+<% end %>

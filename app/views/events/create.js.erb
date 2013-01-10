@@ -1,0 +1,13 @@
+switch('<%= @event.kind %>') {
+  case 'status':
+    console.log('status');
+    var parent = $('#feed-items');
+    var new_status = ('<%= escape_javascript render("events/new_status", event: @event) %>');
+    $(new_status).prependTo(parent).fadeIn('slow');
+    break;
+  case 'comment':
+    var parent = $('#comments-of-<%= @event.parent_event_id %>');
+    var new_comment = ('<%= escape_javascript render("events/comment", comment: @event) %>');
+    parent.append(new_comment);
+    break;
+}

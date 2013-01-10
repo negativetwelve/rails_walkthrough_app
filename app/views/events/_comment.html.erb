@@ -7,11 +7,11 @@
         <%= simple_format(comment.body) %>
       </span>
     </div>
-  </div>
-  <div class="comment-actions">
-    <span class="comment-date">
-      <%= time_ago_in_words(comment.created_at) %> ago
-    </span>
-    <%= link_to 'Like', '#' %>
+    <div class="comment-actions">
+      <span class="comment-date">
+        <%= time_ago_in_words(comment.created_at) %> ago
+      </span>
+      <%= link_to 'Like', '#' %>
+    </div>
   </div>
 <% end %>

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
   
   def profile_picture
-    photos.try(:first).try(:image).try(:url) || Photo.first.image.url
+    photos.try(:first).try(:image).try(:url, :thumb_square) || Photo.first.image.url(:thumb_square)
   end
   
   private

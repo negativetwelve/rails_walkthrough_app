@@ -1,7 +1,7 @@
 <div class="row-fluid">
   <div class="span12 has_header" id="user-photos-content">
     <% @photos.each do |photo| %>
-      <%= image_tag photo.image.url %>
+    <%= image_tag photo.image.url(:medium_square) %>
     <% end %>
   </div>
 </div>

@@ -1,3 +1,20 @@
+<script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var pusher = new Pusher('<%= Pusher.key %>');
+    var channel = pusher.subscribe('news_feed');
+
+    channel.bind('new_status', function(data) {
+      $(data.new_status[0]).prependTo($(data.parent)).fadeIn('slow');
+    });
+  
+    channel.bind('new_comment', function(data) {
+      $(data.parent).append(data.new_comment[0]);
+    });
+  });
+</script>
+
 <% if signed_in? %>
 <div class="row-fluid">
   <div class="span12 has_header" id="home-main-content">

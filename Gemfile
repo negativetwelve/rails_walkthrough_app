@@ -10,6 +10,7 @@ gem 'paperclip'
 gem 'paperclipdropbox'
 gem 'jquery-fileupload-rails', :git =>  'git://github.com/negativetwelve/jquery-fileupload-rails.git'
 gem 'font-awesome-rails'
+gem 'pusher'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

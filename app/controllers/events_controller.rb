@@ -15,10 +15,21 @@ class EventsController < ApplicationController
       @event.parent_event_id = params[:parent_event_id].to_i
     end
     
-    respond_to do |format|    
-      if @event.save
-        format.js
+    if @event.save
+      case @event.kind
+      when 'status'
+        Pusher['news_feed'].trigger('new_status', {
+          :new_status => (render :partial => "events/new_status", :locals => {:event => @event}),
+          :parent => "#feed-items"
+        })
+      when 'comment'
+        Pusher['news_feed'].trigger('new_comment', {
+          new_comment: (render :partial => "events/comment", :locals => {:comment => @event}),
+          parent: "#comments-of-#{@event.parent_event_id}"
+        })
       end
+          
+      #format.js
     end
   end
 end

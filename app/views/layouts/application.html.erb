@@ -7,13 +7,8 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <% if signed_in? %>
     <div class="container-fluid">
-      <%= render 'layouts/header' %>
-    <% end %>
-    
-    <%= yield %>
-    
-    <% if signed_in? %></div><% end %>
+      <%= render 'layouts/header' %>    
+      <%= yield %>
   </body>
 </html>

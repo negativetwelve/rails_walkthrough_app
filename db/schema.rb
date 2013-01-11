@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109091748) do
+ActiveRecord::Schema.define(:version => 20130111070958) do
 
   create_table "events", :force => true do |t|
     t.text     "body",            :default => ""
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(:version => 20130109091748) do
 
   add_index "events", ["parent_event_id", "created_at"], :name => "index_events_on_parent_event_id_and_created_at"
   add_index "events", ["user_id", "created_at"], :name => "index_events_on_user_id_and_created_at"
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
+  add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id", :unique => true
+  add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
   create_table "photos", :force => true do |t|
     t.string   "caption"

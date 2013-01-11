@@ -15,7 +15,7 @@
           <%= link_to 'Share', '#' %>
         </span>
         <span class="event-time">
-          <%= time_ago_in_words(event.created_at) %> ago
+          <%= timeago event.created_at %>
         </span>
       </span>
       <div class="event-comments">

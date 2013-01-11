@@ -1,0 +1,13 @@
+<div class="row-fluid">
+  <div class="span6 offset3">
+    <div class="has_header" id="top-heading">
+      <h3>Rails Walkthrough App Login</h3>
+      <%= render 'shared/flash_messages' %>
+      <%= form_for :session, url: sessions_path do |f| %>
+        <%= f.text_field :email, placeholder: 'Email', class: 'no-margin-bottom' %>
+        <%= f.password_field :password, placeholder: 'Password', class: 'no-margin-bottom' %>
+        <%= f.submit "Sign in", class: "btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>

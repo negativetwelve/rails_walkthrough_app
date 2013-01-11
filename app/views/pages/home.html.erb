@@ -7,11 +7,12 @@
 
     channel.bind('new_status', function(data) {
       $(data.new_status[0]).prependTo($(data.parent)).fadeIn('slow');
+      $('abbr.timeago').timeago();
     });
   
     channel.bind('new_comment', function(data) {
       $(data.parent).append(data.new_comment[0]);
-      $("abbr.timeago").timeago();
+      $('abbr.timeago').timeago();
     });
   });
 </script>
@@ -105,28 +106,21 @@
   </div>
 </div>
 <% else %>
-<div class="container-fluid" id="home-main">
-  <div class="row-fluid">
-    <div class="span6 offset3" id="login">
-      <div id="top-heading">
-        <h3>Rails Walkthrough App</h3>
-        <h5>Connect and share what matters most to you.</h5>
-        <%= render 'shared/flash_messages' %>
-        
-        <%= form_for(:session, url: sessions_path) do |f| %>
-
-          <%= f.label :email %>
-          <%= f.text_field :email %>
-
-          <%= f.label :password %>
-          <%= f.password_field :password %>
-
-          <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-        <% end %>
-        <p><%= link_to 'Create Account', signup_path %></p>
-      </div>
+<div class="row-fluid">
+  <div class="has_header">
+    <div id="signup">
+      <h3>Sign Up</h3>
+      <%= form_for @user, validate: true do |f| %>
+        <%= render 'shared/error_messages', object: @user %>
+        <%= f.text_field :first_name, placeholder: 'First Name', class: 'first_name' %>
+        <%= f.text_field :last_name, placeholder: 'Last Name', class: 'last_name' %>
+        <%= f.text_field :email, placeholder: 'Email', class: 'full_width' %>
+        <%= f.password_field :password, placeholder: 'Password', class: 'full_width' %>
+        <%= f.password_field :password_confirmation, placeholder: 'Re-enter Password', class: 'full_width' %>
+        <%= f.submit "Continue", class: "btn" %>    
+      <% end %>
     </div>
-  </div>  
+  </div>
 </div>
 <% end %>
 

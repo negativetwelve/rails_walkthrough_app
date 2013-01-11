@@ -3,6 +3,11 @@ RailsWalkthroughApp::Application.routes.draw do
   
   resources :users do
     resources :photos
+    member do
+      match '/request', to: 'friendships#req'
+      match '/accept', to: 'friendships#accept'
+      match '/reject', to: 'friendships#reject'
+    end
   end
   
   resources :sessions, only: [:new, :create, :destroy]

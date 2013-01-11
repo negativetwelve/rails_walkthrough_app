@@ -10,9 +10,11 @@
           </a>
           <ul class="dropdown-menu">
             <% current_user.requested_friends.each do |friend| %>
-            <%= friend.name %>
-            <%= link_to 'Accept', controller: :friendships, action: :accept, id: friend.id %>
-            <%= link_to 'Not Now', controller: :friendships, action: :reject, id: friend.id %>
+            <li>
+              <%= friend.name %>
+              <%= link_to 'Accept', controller: :friendships, action: :accept, id: friend.id %>
+              <%= link_to 'Not Now', controller: :friendships, action: :reject, id: friend.id %>
+            </li>
             <% end %>
           </ul>
         </li>
@@ -41,7 +43,7 @@
         <%= form_for :session, url: sessions_path, class: 'navbar-search' do |f| %>
           <%= f.text_field :email, placeholder: 'Email', class: 'no-margin-bottom' %>
           <%= f.password_field :password, placeholder: 'Password', class: 'no-margin-bottom' %>
-          <%= f.submit "Sign in", class: "btn" %>
+          <%= f.submit "Log In", class: "uibutton confirm" %>
         <% end %>
         </li>
       </ul>

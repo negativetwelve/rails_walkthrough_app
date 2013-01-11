@@ -41,7 +41,7 @@
           <%= form_for Event.new, remote: true do |f| %>
             <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", class: 'span12 new_status' %>
             <%= hidden_field_tag :kind, 'status' %>
-            <%= f.submit "Post", class: "btn btn-large btn-primary hidden", id: "status_submit_button" %>
+            <%= f.submit "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
           <% end %>
         </div>
       
@@ -50,28 +50,30 @@
           <%= form_for Photo.new, :url => user_photos_path(current_user), :method => 'POST', :html => { :multipart => true, :id => "fileupload"  } do |f| %>
             <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
             <div class="row-fluid fileupload-buttonbar">
-              <div class="span7">
+              <div class="span10">
                 <!-- The fileinput-button span is used to style the file input field as button -->
-                <span class="btn btn-success fileinput-button">
-                  <i class="icon-plus icon-white"></i>
-                  <span>Add files...</span>
-                  <%= f.file_field :image %>
-                </span>
-                <button type="submit" class="btn btn-primary start">
-                  <i class="icon-upload icon-white"></i>
-                  <span>Start upload</span>
-                </button>
-                <button type="reset" class="btn btn-warning cancel">
-                  <i class="icon-ban-circle icon-white"></i>
-                  <span>Cancel upload</span>
-                </button>
-                <button type="button" class="btn btn-danger delete">
-                  <i class="icon-trash icon-white"></i>
-                  <span>Delete</span>
-                </button>
-                <input type="checkbox" class="toggle">
+                <div class="uibutton-group">
+                  <span class="uibutton large fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>Add files...</span>
+                    <%= f.file_field :image %>
+                  </span>
+                  <button type="submit" class="uibutton large confirm start">
+                    <i class="icon-upload icon-white"></i>
+                    <span>Start upload</span>
+                  </button>
+                  <button type="reset" class="uibutton large cancel">
+                    <i class="icon-ban-circle icon-white"></i>
+                    <span>Cancel upload</span>
+                  </button>
+                  <button type="button" class="uibutton large delete">
+                    <i class="icon-trash icon-white"></i>
+                    <span>Delete</span>
+                  </button>
+                  <input type="checkbox" class="toggle">
+                </div>
               </div>
-              <div class="span5">
+              <div class="span2">
                 <!-- The global progress bar -->
                 <div class="progress progress-success progress-striped active fade">
                   <div class="bar" style="width:0%;"></div>
@@ -117,7 +119,7 @@
         <%= f.text_field :email, placeholder: 'Email', class: 'full_width' %>
         <%= f.password_field :password, placeholder: 'Password', class: 'full_width' %>
         <%= f.password_field :password_confirmation, placeholder: 'Re-enter Password', class: 'full_width' %>
-        <%= f.submit "Continue", class: "btn" %>    
+        <%= f.submit "Continue", class: "uibutton large special" %>    
       <% end %>
     </div>
   </div>
@@ -165,7 +167,7 @@
       <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
     </td>
     <td class="start">{% if (!o.options.autoUpload) { %}
-      <button class="btn btn-primary">
+      <button class="uibutton large confirm">
         <i class="icon-upload icon-white"></i>
         <span>{%=locale.fileupload.start%}</span>
       </button>
@@ -174,7 +176,7 @@
     <td colspan="2"></td>
     {% } %}
     <td class="cancel">{% if (!i) { %}
-      <button class="btn btn-warning">
+      <button class="uibutton large">
         <i class="icon-ban-circle icon-white"></i>
         <span>{%=locale.fileupload.cancel%}</span>
       </button>
@@ -202,7 +204,7 @@
         <td colspan="2"></td>
         {% } %}
       <td class="delete">
-        <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+        <button class="uibutton large" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
           <i class="icon-trash icon-white"></i>
           <span>{%=locale.fileupload.destroy%}</span>
         </button>

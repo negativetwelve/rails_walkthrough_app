@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery-fileupload
+//= require rails-timeago
 //= require_tree .

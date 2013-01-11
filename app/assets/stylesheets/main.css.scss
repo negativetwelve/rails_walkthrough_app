@@ -53,6 +53,11 @@ a:hover {
   text-decoration: none;
 }
 
+abbr[title] {
+  border-bottom: 0px;
+  cursor: text;
+}
+
 .hidden {
   display: none;
 }

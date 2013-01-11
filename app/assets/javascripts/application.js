@@ -14,5 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery-fileupload
-//= require rails-timeago
+//= require jquery.timeago.js
 //= require_tree .
+
+$(document).ready(function() {
+  $("abbr.timeago").timeago();
+});

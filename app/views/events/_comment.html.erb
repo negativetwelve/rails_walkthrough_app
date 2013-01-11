@@ -9,7 +9,7 @@
     </div>
     <div class="comment-actions">
       <span class="comment-date">
-        <%= timeago_tag comment.created_at, :nojs => true %>
+        <%= timeago comment.created_at %>
       </span>
       <%= link_to 'Like', '#' %>
     </div>

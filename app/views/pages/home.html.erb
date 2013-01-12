@@ -39,9 +39,9 @@
       
         <div class="update_form" id="status_update_form">
           <%= form_for Event.new, remote: true do |f| %>
-            <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", class: 'span12 new_status' %>
+            <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", class: 'span12', id: 'new_status' %>
             <%= hidden_field_tag :kind, 'status' %>
-            <%= f.submit "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
+            <%= button_tag "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
           <% end %>
         </div>
       
@@ -96,6 +96,9 @@
           <%= render 'events/status', event: event %>
         <% end %>
         </ul>
+        <div class="pagination pagination-centered">
+          <%= will_paginate @events %>
+        </div>
       </div>
       
       

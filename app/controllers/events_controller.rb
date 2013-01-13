@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  
+
   def new
   end
   
@@ -29,6 +29,14 @@ class EventsController < ApplicationController
         })
       end
     end
+  end
+  
+  def load_comments
+    @event = Event.find(params[:event_id])
+    @per_page = 25
+    @page_num = params[:page].to_i
+    @offset = 4 + @per_page * (params[:page].to_i - 1)
+    @comments = @event.comments.order('created_at DESC').paginate(page: @page_num, per_page: @per_page, offset: @offset).reverse
   end
   
 end

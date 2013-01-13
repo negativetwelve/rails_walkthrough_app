@@ -24,12 +24,21 @@
         </span>
       </span>
       <div class="event-comments">
-        <%= content_tag :ul, class: 'comments-list', id: "comments-of-#{event.id}" do %>
+        <%= content_tag :ul, class: 'comments-list', id: "action_bar_of_#{event.id}" do %>
           <% if event.likes.count != 0 %>
             <%= render 'events/likes_bar', event: event %>
           <% end %>
           
-          <% event.comments.each do |comment| %>
+          <% if event.comments.count > 4 %>
+          <li class="comment-wrapper">
+            <%= link_to_more_comments(event, 1) %>
+            <%= content_tag :span, "4 of #{event.comments.count}", class: "pull-right", id: "comments_of_id_#{event.id}_count" %>
+          </li>
+          <% end %>
+        <% end %>
+          
+        <%= content_tag :ul, class: 'comments-list', id: "comments-of-#{event.id}" do %>
+          <% event.comments.last(4).each do |comment| %>
             <%= render 'events/comment', comment: comment %>
           <% end %>     
         <% end %>

@@ -14,6 +14,7 @@ RailsWalkthroughApp::Application.routes.draw do
   resources :events, only: [:new, :create, :destroy] do
     match '/like', to: 'likes#create'
     match '/unlike', to: 'likes#destroy'
+    match '/comments', to: 'events#load_comments'
   end
   
   match '/signup', to: 'users#new'

@@ -1,4 +1,4 @@
-<%= content_tag(:li, class: 'comment-wrapper') do %>
+<%= content_tag :li, class: 'comment-wrapper' do %>
   <%= link_to image_tag(comment.user.profile_picture, size: '32x32'), comment.user, class: 'comment-profile-picture' %>
   <div class="comment-content">
     <div class="comment-user-info">

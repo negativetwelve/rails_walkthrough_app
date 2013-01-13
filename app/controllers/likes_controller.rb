@@ -13,6 +13,7 @@ class LikesController < ApplicationController
         ul: "#comments-of-#{@like.event_id}",
         likes_bar: (render_to_string :partial => "events/likes_bar", :locals => {:event => @like.event})
       })
+      render 'create'
     end
   end
   

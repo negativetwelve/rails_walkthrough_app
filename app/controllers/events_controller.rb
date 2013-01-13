@@ -28,8 +28,7 @@ class EventsController < ApplicationController
           parent: "#comments-of-#{@event.parent_event_id}"
         })
       end
-          
-      #format.js
     end
   end
+  
 end

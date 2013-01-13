@@ -30,10 +30,10 @@
           <% end %>
           
           <% if event.comments.count > 4 %>
-          <li class="comment-wrapper">
-            <%= link_to_more_comments(event, 1) %>
-            <%= content_tag :span, "4 of #{event.comments.count}", class: "pull-right", id: "comments_of_id_#{event.id}_count" %>
-          </li>
+            <%= content_tag :li, class: 'comment-wrapper', id: "show_more_comments_id_#{event.id}" do %>
+              <%= link_to_more_comments(event, 0, 1) %>
+              <%= content_tag :span, "4 of #{event.comments.count}", class: "pull-right", id: "comments_of_id_#{event.id}_count" %>
+            <% end %>
           <% end %>
         <% end %>
           

@@ -1,9 +1,12 @@
 $("#comments-of-<%= @event.id %>").prepend("<%= escape_javascript(render('events/comments', comments: @comments)) %>");
+if (<%= @end %>) {
+  $("#show_more_comments_id_<%= @event.id %>").fadeOut('fast', function() { this.remove() });
+} else {
+  var curr_num = $("#comments_of_id_<%= @event.id %>_count")[0];
+  curr_num.innerHTML = parseInt(curr_num.innerHTML.split(" ")[0]) + <%= @per_page %> + " of " + <%= @event.comments.count %>;
 
-var curr_num = $("#comments_of_id_<%= @event.id %>_count")[0];
-curr_num.innerHTML = parseInt(curr_num.innerHTML.split(" ")[0]) + <%= @per_page %> + " of " + <%= @event.comments.count %>;
-
-var link = $("#load_more_id_<%= @event.id %>")[0];
-link.href = link.href.split('=')[0] + "=" + String(parseInt(link.href.split('=')[1]) + 1);
+  var link = $("#load_more_id_<%= @event.id %>")[0];
+  link.href = link.href.split('page=')[0] + "page=" + String(parseInt(link.href.split('page=')[1]) + 1);
+}
 
 $("abbr.timeago").timeago();

@@ -25,7 +25,8 @@ class EventsController < ApplicationController
       when 'comment'
         Pusher['news_feed'].trigger('new_comment', {
           new_comment: (render :partial => "events/comment", :locals => {:comment => @event}),
-          parent: "#comments-of-#{@event.parent_event_id}"
+          parent: "#comments-of-#{@event.parent_event_id}",
+          link: "#load_more_id_#{@event.parent_event_id}"
         })
       end
     end
@@ -33,9 +34,10 @@ class EventsController < ApplicationController
   
   def load_comments
     @event = Event.find(params[:event_id])
-    @per_page = 25
+    @per_page = 50
     @page_num = params[:page].to_i
-    @offset = 4 + @per_page * (params[:page].to_i - 1)
+    @offset = 4 + @per_page * (params[:page].to_i - 1) + params[:offset].to_i
+    @end = @offset + @per_page * @page_num > @event.comments.count
     @comments = @event.comments.order('created_at DESC').paginate(page: @page_num, per_page: @per_page, offset: @offset).reverse
   end
   

@@ -27,8 +27,8 @@ module ApplicationHelper
             data: {id: event.id})
   end
   
-  def link_to_more_comments(event, page)
-    link_to('View previous comments', {controller: 'events', action: 'load_comments', page: page, event_id: event.id}, remote: true, id: "load_more_id_#{event.id}")
+  def link_to_more_comments(event, offset, page)
+    link_to('View previous comments', {controller: 'events', action: 'load_comments', offset: offset, page: page, event_id: event.id}, remote: true, id: "load_more_id_#{event.id}")
   end
   
 end

@@ -12,6 +12,10 @@
   
     channel.bind('new_comment', function(data) {
       $(data.parent).append(data.new_comment[0]);
+      if ($(data.link).length > 0) {
+        var split_by_offset = $(data.link)[0].href.split('offset=');
+        $(data.link)[0].href = split_by_offset[0] + "offset=" + String(parseInt(split_by_offset[1].split('&')[0]) + 1) + '&' + split_by_offset[1].split('&')[1];
+      }
       $('abbr.timeago').timeago();
     });
     
@@ -20,7 +24,7 @@
         $(data.likes_bar).prependTo($(data.ul)).fadeIn('slow');
       } else {
         $(data.selected_event)[0].innerHTML = String(parseInt($(data.selected_event)[0].innerHTML.split(' ')[0]) + 1) + ' people like this.';
-      }    
+      }
     });
     
     channel.bind('new_status_unlike', function(data) {

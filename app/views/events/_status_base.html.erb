@@ -11,9 +11,9 @@
       <span class="action-bar">
         <span class="actions">
           <% if event.likers.include?(current_user) %>
-            <%= link_to 'Unlike', event_unlike_path(event_id: event.id), remote: true, id: "comment_id_#{event.id}_like_button" %>
+            <%= link_to_unlike_button(event) %>
           <% else %>
-            <%= link_to 'Like', event_like_path(event_id: event.id), remote: true, id: "comment_id_#{event.id}_like_button", class: "comment_like_button" %>
+            <%= link_to_like_button(event) %>
           <% end %>
           
           <%= link_to 'Comment', '#' %>

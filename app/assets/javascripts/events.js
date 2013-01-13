@@ -17,4 +17,16 @@ $(document).ready(function() {
     $('#new_status')[0].value = '';
   });
   
+  $('.comment_like_button').live("ajax:success", function(event, xhr, status) {
+    var like_button = "#comment_id_" + String(this.dataset.id) + "_like_button";
+    var word;
+    if (this.text == "Unlike") {
+      word = "Like";
+    } else {
+      word = "Unlike";
+    }
+    $(like_button)[0].innerHTML = word;
+    $(like_button)[0].href = '/events/' + String(this.dataset.id) + '/' + word.toLowerCase();
+  });
+  
 });

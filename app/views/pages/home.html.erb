@@ -15,7 +15,7 @@
       $('abbr.timeago').timeago();
     });
     
-    channel.bind('new_like', function(data) {
+    channel.bind('new_status_like', function(data) {
       if (data.count == 1) {
         $(data.likes_bar).prependTo($(data.ul)).fadeIn('slow');
       } else {
@@ -23,13 +23,29 @@
       }    
     });
     
-    channel.bind('new_unlike', function(data) {
+    channel.bind('new_status_unlike', function(data) {
       if (data.count == 0) {
         $(data.likes_bar).fadeOut('fast', function() { $(data.likes_bar).remove() });
       } else if (data.count == 1) {
         $(data.selected_event)[0].innerHTML = '1 person likes this.';
       } else {
         $(data.selected_event)[0].innerHTML = String(parseInt($(data.selected_event)[0].innerHTML.split(' ')[0]) - 1) + ' people like this.';
+      }
+    });
+    
+    channel.bind('new_comment_like', function(data) {
+      if (data.count == 1) {
+        $(data.thumbs_up).prependTo($(data.parent)).fadeIn('slow');
+      } else {
+        $(data.selected_event)[0].innerHTML = parseInt($(data.selected_event)[0].innerHTML) + 1;
+      }
+    });
+    
+    channel.bind('new_comment_unlike', function(data) {
+      if (data.count == 0) {
+        $(data.thumbs_up).fadeOut('fast', function() { $(data.thumbs_up).remove() });
+      } else {
+        $(data.selected_event)[0].innerHTML = parseInt($(data.selected_event)[0].innerHTML) - 1;
       }
     });
     

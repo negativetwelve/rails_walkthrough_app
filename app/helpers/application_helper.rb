@@ -9,4 +9,22 @@ module ApplicationHelper
     request.fullpath == '/login'
   end
   
+  def link_to_like_button(event)
+    link_to('Like',
+            event_like_path(event_id: event.id),
+            remote: true,
+            id: "comment_id_#{event.id}_like_button",
+            class: "comment_like_button",
+            data: {id: event.id})
+  end
+  
+  def link_to_unlike_button(event)
+    link_to('Unlike',
+            event_unlike_path(event_id: event.id),
+            remote: true,
+            id: "comment_id_#{event.id}_like_button",
+            class: "comment_like_button",
+            data: {id: event.id})
+  end
+  
 end

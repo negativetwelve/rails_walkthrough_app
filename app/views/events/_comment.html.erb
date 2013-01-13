@@ -13,14 +13,17 @@
       </span>
       <span>
         <% if comment.likers.include?(current_user) %>
-          <%= link_to 'Unlike', event_unlike_path(event_id: comment.id), remote: true, id: "comment_id_#{comment.id}_like_button" %>
+          <%= link_to_unlike_button(comment) %>
         <% else %>
-          <%= link_to 'Like', event_like_path(event_id: comment.id), remote: true, id: "comment_id_#{comment.id}_like_button", class: "comment_like_button" %>
+          <%= link_to_like_button(comment) %>
         <% end %>
       </span>
-      <% if comment.likes.count != 0 %>      
-        <%= render 'events/comment_like', comment: comment %>
+      <%= content_tag :span, id: "comment_likes_parent_#{comment.id}" do %>
+        <% if comment.likes.count != 0 %>      
+          <%= render 'events/comment_like', comment: comment %>
+        <% end %>
       <% end %>
+    </span>
     </div>
   </div>
 <% end %>

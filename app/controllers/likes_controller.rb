@@ -5,6 +5,7 @@ class LikesController < ApplicationController
     @like.user_id = current_user.id
     @like.event_id = params[:event_id].to_i
     if !Like.find_by_event_id_and_user_id(@like.event_id, @like.user_id) && @like.save
+      render 'create'
       Pusher['news_feed'].trigger('new_like', {
         selected_event: "#comment_like_id_#{@like.event_id}",
         like_button: "#comment_id_#{@like.event_id}_like_button",
@@ -13,7 +14,6 @@ class LikesController < ApplicationController
         ul: "#comments-of-#{@like.event_id}",
         likes_bar: (render_to_string :partial => "events/likes_bar", :locals => {:event => @like.event})
       })
-      render 'create'
     end
   end
   

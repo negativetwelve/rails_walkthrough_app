@@ -1,0 +1,4 @@
+<%= content_tag :span, id: "comment_like_id_#{comment.id}" do %>
+  <i class="icon-thumbs-up"></i>
+  <%= link_to comment.likes.count, '#test_modal', data: {toggle: :modal} %>
+<% end %>

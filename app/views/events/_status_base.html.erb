@@ -10,7 +10,12 @@
       <% end %>
       <span class="action-bar">
         <span class="actions">
-          <%= link_to 'Like', '#' %>
+          <% if event.likers.include?(current_user) %>
+            <%= link_to 'Unlike', event_unlike_path(event_id: event.id), remote: true, id: "comment_id_#{event.id}_like_button" %>
+          <% else %>
+            <%= link_to 'Like', event_like_path(event_id: event.id), remote: true, id: "comment_id_#{event.id}_like_button", class: "comment_like_button" %>
+          <% end %>
+          
           <%= link_to 'Comment', '#' %>
           <%= link_to 'Share', '#' %>
         </span>
@@ -20,9 +25,10 @@
       </span>
       <div class="event-comments">
         <%= content_tag :ul, class: 'comments-list', id: "comments-of-#{event.id}" do %>
-          <li class="comment-wrapper">
-            Mark Miyashita likes this.
-          </li>
+          <% if event.likes.count != 0 %>
+            <%= render 'events/likes_bar', event: event %>
+          <% end %>
+          
           <% event.comments.each do |comment| %>
             <%= render 'events/comment', comment: comment %>
           <% end %>     

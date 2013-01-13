@@ -1,0 +1,4 @@
+console.log('create.js.erb');
+var like_button = "#comment_id_" + <%= @like.event_id %> + "_like_button";
+$(like_button)[0].innerHTML = 'Unlike';
+$(like_button)[0].href = '/events/' + <%= @like.event_id %> + '/unlike';

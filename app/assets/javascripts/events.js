@@ -16,4 +16,5 @@ $(document).ready(function() {
   $("#new_event").live("ajax:beforeSend", function(event, xhr, status) {
     $('#new_status')[0].value = '';
   });
+  
 });

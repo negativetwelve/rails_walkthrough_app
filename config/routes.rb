@@ -11,7 +11,10 @@ RailsWalkthroughApp::Application.routes.draw do
   end
   
   resources :sessions, only: [:new, :create, :destroy]
-  resources :events, only: [:new, :create, :destroy]
+  resources :events, only: [:new, :create, :destroy] do
+    match '/like', to: 'likes#create'
+    match '/unlike', to: 'likes#destroy'
+  end
   
   match '/signup', to: 'users#new'
   match '/login',  to: 'sessions#new'

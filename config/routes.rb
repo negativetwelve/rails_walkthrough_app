@@ -15,6 +15,7 @@ RailsWalkthroughApp::Application.routes.draw do
     match '/like', to: 'likes#create'
     match '/unlike', to: 'likes#destroy'
     match '/comments', to: 'events#load_comments'
+    match '/likers', to: 'events#likers'
   end
   
   match '/signup', to: 'users#new'

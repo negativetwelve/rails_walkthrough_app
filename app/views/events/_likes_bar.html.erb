@@ -1,9 +1,11 @@
 <%= content_tag :li, class: "comment-wrapper", id: "likes_bar_id_#{event.id}" do %>
   <%= content_tag :span do %>
       <i class="icon-thumbs-up"></i>
-      <%= link_to pluralize(event.likes.count, 'person likes this.', 'people like this.'), '#test_modal',
-                            data: {toggle: :modal},
-                            id: "comment_like_id_#{event.id}"
+      <%= link_to pluralize(event.likes.count, 'person likes this.', 'people like this.'),
+                            {controller: 'events', action: 'likers', event_id: event.id},
+                            {remote: true,
+                            id: "comment_like_id_#{event.id}",
+                            class: "link_to_likes"}
       %>
   <% end %>
 <% end %>

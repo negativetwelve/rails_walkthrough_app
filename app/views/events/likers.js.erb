@@ -1,0 +1,2 @@
+$("#comment_likes_modal").modal({keyboard: true});
+$("#comment_likes_modal .modal-body").html( "<%= escape_javascript( render( :partial => 'users/users_modal', :locals => { :users => @likers} ) ) %>" );

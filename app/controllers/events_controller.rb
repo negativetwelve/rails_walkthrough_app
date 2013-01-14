@@ -41,4 +41,8 @@ class EventsController < ApplicationController
     @comments = @event.comments.order('created_at DESC').paginate(page: @page_num, per_page: @per_page, offset: @offset).reverse
   end
   
+  def likers
+    @likers = Event.find(params[:event_id]).likers.uniq
+  end
+  
 end

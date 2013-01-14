@@ -6,6 +6,7 @@ if (<%= @end %>) {
   curr_num.innerHTML = parseInt(curr_num.innerHTML.split(" ")[0]) + <%= @per_page %> + " of " + <%= @event.comments.count %>;
 
   var link = $("#load_more_id_<%= @event.id %>")[0];
+  link.innerHTML = "View previous comments";
   link.href = link.href.split('page=')[0] + "page=" + String(parseInt(link.href.split('page=')[1]) + 1);
 }
 

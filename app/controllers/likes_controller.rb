@@ -11,7 +11,8 @@ class LikesController < ApplicationController
           selected_event: "#comment_like_id_#{@like.event_id}",
           count: @like.event.likes.count,
           ul: "#action_bar_of_#{@like.event_id}",
-          likes_bar: (render_to_string :partial => "events/likes_bar", :locals => {:event => @like.event})
+          likes_bar: (render_to_string :partial => "events/likes_bar", :locals => {:event => @like.event}),
+          event_id: @like.event_id
         })
       when 'comment'
         Pusher['news_feed'].trigger('new_comment_like', {

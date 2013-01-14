@@ -16,7 +16,7 @@
             <%= link_to_like_button(event) %>
           <% end %>
           
-          <%= link_to 'Comment', '#' %>
+          <%= link_to 'Comment', "#", onclick: "show_comment_box(#{event.id}); return false;" %>
           <%= link_to 'Share', '#' %>
         </span>
         <span class="event-time">
@@ -31,6 +31,7 @@
           
           <% if event.comments.count > 4 %>
             <%= content_tag :li, class: 'comment-wrapper', id: "show_more_comments_id_#{event.id}" do %>
+              <i class="icon-comments-alt"></i>
               <%= link_to_more_comments(event, 0, 1) %>
               <%= content_tag :span, "4 of #{event.comments.count}", class: "pull-right", id: "comments_of_id_#{event.id}_count" %>
             <% end %>
@@ -44,14 +45,7 @@
         <% end %>
         
         <%= content_tag :ul, class: 'comments-list', id: "comment-box-#{event.id}" do %>
-          <%= content_tag :li, class: 'comment-wrapper' do %>
-            <%= image_tag current_user.profile_picture, size: '32x32', class: 'comment-profile-picture' %>
-            <%= form_for Event.new, remote: true, html: {class: 'new_comment_form', id: "new_comment_form_#{event.id}"} do |f| %>
-              <%= f.text_area :body, placeholder: "Write a comment...", class: 'comment-input', data: {id: "#{event.id}"} %>
-              <%= hidden_field_tag :kind, 'comment' %>
-              <%= hidden_field_tag :parent_event_id, event.id %>
-            <% end %>
-          <% end %>
+          <%= render 'events/comment_box', event: event %>
         <% end %>
       </div>
     </div>

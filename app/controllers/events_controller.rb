@@ -13,6 +13,8 @@ class EventsController < ApplicationController
     when 'status'
     when 'comment'
       @event.parent_event_id = params[:parent_event_id].to_i
+    when 'wall_post'
+      @event.receiver_id = params[:user_id].to_i
     end
     
     if @event.save
@@ -27,6 +29,11 @@ class EventsController < ApplicationController
           new_comment: (render :partial => "events/comment", :locals => {:comment => @event}),
           parent: "#comments-of-#{@event.parent_event_id}",
           link: "#load_more_id_#{@event.parent_event_id}"
+        })
+      when 'wall_post'
+        Pusher['news_feed'].trigger('new_wall_post', {
+          :new_wall_post => (render :partial => "events/new_wall_post", :locals => {:event => @event}),
+          :parent => "#feed-items"
         })
       end
     end

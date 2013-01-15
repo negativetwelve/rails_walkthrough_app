@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   
   belongs_to :parent_event, class_name: 'Event'
   belongs_to :user
+  belongs_to :receiver, class_name: 'User'
   
   has_many :comments, :foreign_key => :parent_event_id, :class_name => 'Event'
   has_many :commenters, :through => :comments, :source => 'user'

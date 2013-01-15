@@ -2,7 +2,7 @@
 <div class="user-event-inner">
   <div class="event-inner-wrapper">
     <div class="main-event-content">
-      <h5><%= link_to event.user.name, event.user, class: 'event-user-name' %></h5>
+      <h5><%= link_to event.user.name, event.user, class: 'event-user-name' %><i class="icon-caret-right"></i><%= link_to event.receiver.name, event.receiver, class: 'event-user-name' %></h5>
       <%= render 'events/base', event: event %>
     </div>
   </div>

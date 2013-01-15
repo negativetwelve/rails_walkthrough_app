@@ -31,6 +31,20 @@ $(document).ready(function() {
   
 });
 
+function show_status() {
+  $('#home_page_update .update_form').hide();
+  $('#home_page_update #status_update_form').show();
+};
+  
+function show_uploader() {
+  $('#home_page_update .update_form').hide();
+  $('#home_page_update #upload_photos_form').show();
+};
+  
+function show_status_submit() {
+  $('#status_submit_button').show();
+};
+
 function show_comment_box(event_id) {
   var comment_box = "#comment-box-" + event_id + " .comment-wrapper";
   $(comment_box).fadeIn('fast');

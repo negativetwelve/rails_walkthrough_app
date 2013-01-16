@@ -77,7 +77,7 @@
       </ul>
     </div>
     
-    <div class="column" id="middle_column">
+    <div id="middle_column">
       <div class="column" id="right_column">
 
       </div>
@@ -89,7 +89,7 @@
       
           <div class="update_form" id="status_update_form">
             <%= form_for Event.new, remote: true do |f| %>
-              <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", id: 'new_status' %>
+              <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", id: 'new_status', class: 'full_width' %>
               <%= hidden_field_tag :kind, 'status' %>
               <%= button_tag "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
             <% end %>

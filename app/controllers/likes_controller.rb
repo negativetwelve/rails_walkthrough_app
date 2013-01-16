@@ -6,7 +6,7 @@ class LikesController < ApplicationController
     @like.event_id = params[:event_id].to_i
     if !Like.find_by_event_id_and_user_id(@like.event_id, @like.user_id) && @like.save
       case @like.event.kind
-      when 'status'
+      when 'status', 'wall_post'
         Pusher['news_feed'].trigger('new_status_like', {
           selected_event: "#comment_like_id_#{@like.event_id}",
           count: @like.event.likes.count,
@@ -31,7 +31,7 @@ class LikesController < ApplicationController
     @event_id = @like.event_id
     if @like.destroy
       case @like.event.kind
-      when 'status'
+      when 'status', 'wall_post'
         Pusher['news_feed'].trigger('new_status_unlike', {
           selected_event: "#comment_like_id_#{@like.event_id}",
           count: Event.find(@event_id).likes.count,

@@ -1,6 +1,8 @@
 class Photo < ActiveRecord::Base
   attr_accessible :caption, :image
+  
   belongs_to :user
+  belongs_to :event
   
   has_attached_file :image,
                     styles: {
@@ -12,7 +14,7 @@ class Photo < ActiveRecord::Base
                       thumb_square: '60x60#'
                     },
                     storage: :Dropboxstorage,
-                    path: "/#{Rails.env}/:attachment/:id/:style/:filename"
+                    path: "/#{Rails.env}/:attachment/:id/:style/:filename"  
   
   include Rails.application.routes.url_helpers
   

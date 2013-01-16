@@ -1,14 +1,34 @@
-<div class="row-fluid">
+<div class="row">
   <div class="span10 has_header">
-    <%= @user.name %>
-    <%= link_to 'Add Friend', controller: :friendships, action: :req, id: @user.id %>
-    
-    <%= form_for Event.new, remote: true do |f| %>
-    <%= f.text_area :body, placeholder: "Write something...", onfocus: "show_status_submit()", class: 'span12', id: 'new_status' %>
-      <%= hidden_field_tag :kind, 'wall_post' %>
-      <%= hidden_field_tag :user_id, @user.id %>
-      <%= button_tag "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
-    <% end %>
-    
+    <div id="profile_container">
+      
+      <div id="profile_header">
+        <%= user_profile_picture_tag(@user, 100) %>
+        <%= @user.name %>
+        <%= link_to 'Add Friend', controller: :friendships, action: :req, id: @user.id %>
+      </div>
+      
+      <div id="status_update_form">        
+        <%= form_for Event.new, remote: true do |f| %>
+        <%= f.text_area :body, placeholder: "Write something...", onfocus: "show_status_submit()", class: 'span12', id: 'new_status' %>
+          <%= hidden_field_tag :kind, 'wall_post' %>
+          <%= hidden_field_tag :user_id, @user.id %>
+          <%= button_tag "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
+        <% end %>
+      </div>
+      
+      <div class="feed_items_all">
+        <ul id="feed-items">
+          <% @events.each do |event| %>
+          <%= render 'events/event', event: event %>
+        <% end %>
+        </ul>
+      </div>
+      
+      <div class="pagination pagination-centered">
+        <%= will_paginate @events %>
+      </div>
+      
+    </div>
   </div>
 </div>

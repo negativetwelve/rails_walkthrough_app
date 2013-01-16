@@ -68,16 +68,34 @@ input[type=text], input[type=password], textarea {
   border-radius: 0px;
 }
 
+.container {
+  width: 980px !important;
+  
+  .row {
+    margin-left: 0px;
+    
+    .span12 {
+      width: 980px;
+      margin-left: 0px;
+    }
+  }
+}
+
+.navbar {
+  .container {
+    .brand {
+      margin-left: 0px;
+      padding-left: 0px;
+    }
+  }
+}
+
 .no-margin-bottom {
   margin-bottom: 0px !important;
 }
 
 .nav-collapse.collapse {
   height: 0px;
-}
-
-.column {
-  word-wrap: break-word;
 }
 
 .modal_border {
@@ -90,7 +108,7 @@ input[type=text], input[type=password], textarea {
   line-height: 20px;
   
   .navbar-inner {
-    .container-fluid {
+    .container {
       .nav {
         .dropdown {
           .dropdown-menu {
@@ -136,31 +154,33 @@ input[type=text], input[type=password], textarea {
   }
 }
 
-.feed-items-all {
+.feed_items_all {
   #feed-items {
     margin: 0;
     
-    .event-box {
+    .event_box {
       list-style: none;
-      padding-left: 15px;
+      padding-left: 18px;
+      margin-left: -18px;
       border-bottom: 1px solid $gray_border;
       
-      .user-picture {
+      .user_picture {
         float: left;
         margin-top: 16px;
         margin-bottom: 16px;
       }
       
-      .user-event-inner {
+      .user_event_inner {
         margin-left: 60px;
         display: block;
+        min-height: 65px;
         
-        .event-inner-wrapper {
+        .event_inner_wrapper {
           padding-top: 16px;
           margin-bottom: 16px;
           margin-right: 35px;
           
-          .main-event-content {
+          .main_event_content {
             display: block;
             
             h5 {
@@ -170,53 +190,53 @@ input[type=text], input[type=password], textarea {
               margin: 0 0 5px 0;
             }
             
-            .event-content {
+            .event_content {
               font-size: 13px;
               line-height: 1.38;
             }
             
-            .action-bar {
+            .action_bar {
               font-size: 11px;
               line-height: 1.28;
             }
             
-            .event-user-name {
+            .event_user_name {
               font-weight: bold;
             }
             
-            .event-comments {
-              .comments-list {
+            .event_comments {
+              .comments_list {
                 margin: 0px;
                 
-                .comment-wrapper {
+                .comment_wrapper {
                   background-color: $comment_blue;
                   list-style: none;
                   padding: 4px;
                   margin-top: 1px;
                   font-size: 11px;
                   
-                  .comment-profile-picture {
+                  .comment_profile_picture {
                     float: left;
                     margin-right: 8px;
                   }
                   
-                  .comment-content {
+                  .comment_content {
                     overflow: hidden;
                     display: block;
                     
-                    .comment-user-name {
+                    .comment_user_name {
                       font-weight: bold;
                     }
                   }
                   
-                  .comment-input {
+                  .comment_input {
                     resize: none;
                     height: 20px;
                     font-size: 11px;
                     line-height: 1.28;
                   }
                   
-                  .comment-actions {
+                  .comment_actions {
                     margin-top: 2px;
                   }
                   
@@ -241,8 +261,14 @@ input[type=text], input[type=password], textarea {
   padding-top: 37px;
 }
 
+.column {
+  float: left;
+  word-wrap: break-word;
+}
+
 #left_column {
   padding-top: $home_page_column_padding;
+  width: 179px;
   
   .column_nav .active a,
   .column_nav .active a:hover {
@@ -257,23 +283,26 @@ input[type=text], input[type=password], textarea {
 
 #middle_column {
   padding-top: $home_page_column_padding;
+  width: 799px;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  padding-right: 15px;
   min-height: 700px;
   font-size: 13px;
   
-  #home_page_update {
-    padding-left: 15px;
-    
-    #status_update_form {
-        
-      #new_status {
-        resize: none;
-        font-size: 13px;
-        line-height: 1.28;
-        height: 16px;
-        padding: 7px 5px 5px 5px;
+  #main_content {
+    padding-left: 18px;
+    padding-right: 25px;
+    width: 511px;
+  
+    #home_page_update {    
+      #status_update_form {
+        #new_status {
+          resize: none;
+          font-size: 13px;
+          line-height: 1.28;
+          height: 16px;
+          padding: 7px 5px 5px 5px;
+        }
       }
     }
   }
@@ -281,4 +310,23 @@ input[type=text], input[type=password], textarea {
 
 #right_column {
   padding-top: $home_page_column_padding;
+  width: 240px;
+  float: right;
+}
+
+#profile_container {
+  
+  #profile_header {
+    
+  }
+  
+  #status_update_form {
+    #new_status {
+      resize: none;
+      font-size: 13px;
+      line-height: 1.28;
+      height: 16px;
+      padding: 7px 5px 5px 5px;
+    }
+  }
 }

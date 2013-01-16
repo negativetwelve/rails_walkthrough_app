@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115080339) do
+ActiveRecord::Schema.define(:version => 20130116004535) do
 
   create_table "events", :force => true do |t|
     t.text     "body",            :default => ""
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130115080339) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "event_id"
   end
 
   add_index "photos", ["user_id", "created_at"], :name => "index_photos_on_user_id_and_created_at"

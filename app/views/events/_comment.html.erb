@@ -1,13 +1,13 @@
-<%= content_tag :li, class: 'comment-wrapper' do %>
-  <%= link_to image_tag(comment.user.profile_picture, size: '32x32'), comment.user, class: 'comment-profile-picture' %>
-  <div class="comment-content">
+<%= content_tag :li, class: 'comment_wrapper' do %>
+  <%= link_to image_tag(comment.user.profile_picture, size: '32x32'), comment.user, class: 'comment_profile_picture' %>
+  <div class="comment_content">
     <div class="comment-user-info">
-      <%= link_to comment.user.name, comment.user, class: 'comment-user-name' %>
+      <%= link_to comment.user.name, comment.user, class: 'comment_user_name' %>
       <span class="comment-text">
         <%= simple_format(comment.body) %>
       </span>
     </div>
-    <div class="comment-actions">
+    <div class="comment_actions">
       <span class="comment-date">
         <%= timeago comment.created_at %>
       </span>

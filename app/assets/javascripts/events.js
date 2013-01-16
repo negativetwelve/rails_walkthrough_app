@@ -1,6 +1,6 @@
 $(document).ready(function() {
   
-  $('.comment-input').live("keydown", function(e) {
+  $('.comment_input').live("keydown", function(e) {
     if (e.keyCode == 13 && !e.shiftKey) {
       if (this.value.match("^\\s*$") == null) {
         var parent = '#new_comment_form_' + $(this).data('id');
@@ -46,7 +46,7 @@ function show_status_submit() {
 };
 
 function show_comment_box(event_id) {
-  var comment_box = "#comment-box-" + event_id + " .comment-wrapper";
+  var comment_box = "#comment-box-" + event_id + " .comment_wrapper";
   $(comment_box).fadeIn('fast');
   $(comment_box + " #event_body").focus();
 };

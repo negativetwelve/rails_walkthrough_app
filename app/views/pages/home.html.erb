@@ -63,9 +63,10 @@
 </script>
 
 <% if signed_in? %>
-<div class="row-fluid">
+<div class="row">
   <div class="span12 has_header" id="home-main-content">
-    <div class="span2 column" id="left_column">
+    
+    <div class="column" id="left_column">
       <%= image_tag current_user.profile_picture, size: '50x50' %>
       <%= current_user.name %>
       <ul class="nav nav-list column_nav">
@@ -76,92 +77,49 @@
       </ul>
     </div>
     
-    <div class="span7 column" id="middle_column">
-      
-      <div id="home_page_update">
-        <a id="show_status" href="#" onclick="show_status()">Update Status</a>
-        <a id="show_photo_upload" href="#" onclick="show_uploader()">Add Photos</a>
-      
-        <div class="update_form" id="status_update_form">
-          <%= form_for Event.new, remote: true do |f| %>
-            <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", class: 'span12', id: 'new_status' %>
-            <%= hidden_field_tag :kind, 'status' %>
-            <%= button_tag "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
-          <% end %>
-        </div>
-      
-        <div class="update_form hidden" id="upload_photos_form">
-          <h2>Upload Photos</h2>
-          <%= form_for Photo.new, :url => user_photos_path(current_user), :method => 'POST', :html => { :multipart => true, :id => "fileupload"  } do |f| %>
-            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-            <div class="row-fluid fileupload-buttonbar">
-              <div class="span10">
-                <!-- The fileinput-button span is used to style the file input field as button -->
-                <div class="uibutton-group">
-                  <span class="uibutton large fileinput-button">
-                    <i class="icon-plus icon-white"></i>
-                    <span>Add files...</span>
-                    <%= f.file_field :image %>
-                  </span>
-                  <button type="submit" class="uibutton large confirm start">
-                    <i class="icon-upload icon-white"></i>
-                    <span>Start upload</span>
-                  </button>
-                  <button type="reset" class="uibutton large cancel">
-                    <i class="icon-ban-circle icon-white"></i>
-                    <span>Cancel upload</span>
-                  </button>
-                  <button type="button" class="uibutton large delete">
-                    <i class="icon-trash icon-white"></i>
-                    <span>Delete</span>
-                  </button>
-                  <input type="checkbox" class="toggle">
-                </div>
-              </div>
-              <div class="span2">
-                <!-- The global progress bar -->
-                <div class="progress progress-success progress-striped active fade">
-                  <div class="bar" style="width:0%;"></div>
-                </div>
-              </div>
-            </div>
-            <!-- The loading indicator is shown during image processing -->
-            <div class="fileupload-loading"></div>
-            <br>
-            <!-- The table listing the files available for upload/download -->
-            <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
-            </table>
-          <% end %>
-        </div>
+    <div class="column" id="middle_column">
+      <div class="column" id="right_column">
+
       </div>
       
-      <div class="feed-items-all">
-        <ul id="feed-items">
-        <% @events.each do |event| %>
-          <% case event.kind %>
-          <% when 'status' %>
-            <%= render 'events/status', event: event %>
-          <% when 'wall_post' %>
-            <%= render 'events/wall_post', event: event %>
+      <div id="main_content">
+        <div id="home_page_update">
+          <a id="show_status" href="#" onclick="show_status()">Update Status</a>
+          <a id="show_photo_upload" href="#" onclick="show_uploader()">Add Photos</a>
+      
+          <div class="update_form" id="status_update_form">
+            <%= form_for Event.new, remote: true do |f| %>
+              <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", id: 'new_status' %>
+              <%= hidden_field_tag :kind, 'status' %>
+              <%= button_tag "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
+            <% end %>
+          </div>
+      
+          <div class="update_form hidden" id="upload_photos_form">
+            <h2>Upload Photos</h2>
+            <%= form_for Photo.new, :url => user_photos_path(current_user), :method => 'POST', :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+              <%= render 'photos/photo_uploader', f: f %>
+            <% end %>
+          </div>
+        </div>
+      
+        <div class="feed_items_all">
+          <ul id="feed-items">
+          <% @events.each do |event| %>
+            <%= render 'events/event', event: event %>
           <% end %>
-        <% end %>
-        </ul>
-        <div class="pagination pagination-centered">
-          <%= will_paginate @events %>
+          </ul>
+          <div class="pagination pagination-centered">
+            <%= will_paginate @events %>
+          </div>
         </div>
       </div>
-      
-      
-    </div>
-    
-    <div class="span3 column" id="right_column">
-    
     </div>
     
   </div>
 </div>
 <% else %>
-<div class="row-fluid">
+<div class="row">
   <div class="has_header">
     <div id="signup">
       <h3>Sign Up</h3>
@@ -191,98 +149,3 @@
     <button class="uibutton confirm" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>
-
-<script>
-  var fileUploadErrors = {
-    maxFileSize: 'File is too big',
-    minFileSize: 'File is too small',
-    acceptFileTypes: 'Filetype not allowed',
-    maxNumberOfFiles: 'Max number of files exceeded',
-    uploadedBytes: 'Uploaded bytes exceed file size',
-    emptyResult: 'Empty file upload result'
-  };
-</script>
-
-<!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
-  {% for (var i=0, file; file=o.files[i]; i++) { %}
-  <tr class="template-upload fade">
-    <td class="preview"><span class="fade"></span></td>
-    <td class="name"><span>{%=file.name%}</span></td>
-    <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-    {% if (file.error) { %}
-    <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
-    {% } else if (o.files.valid && !i) { %}
-    <td>
-      <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
-    </td>
-    <td class="start">{% if (!o.options.autoUpload) { %}
-      <button class="uibutton large confirm">
-        <i class="icon-upload icon-white"></i>
-        <span>{%=locale.fileupload.start%}</span>
-      </button>
-      {% } %}</td>
-    {% } else { %}
-    <td colspan="2"></td>
-    {% } %}
-    <td class="cancel">{% if (!i) { %}
-      <button class="uibutton large">
-        <i class="icon-ban-circle icon-white"></i>
-        <span>{%=locale.fileupload.cancel%}</span>
-      </button>
-      {% } %}</td>
-  </tr>
-  {% } %}
-</script>
-<!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
-  {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
-      {% if (file.error) { %}
-        <td></td>
-        <td class="name"><span>{%=file.name%}</span></td>
-        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-        <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
-        {% } else { %}
-        <td class="preview">{% if (file.thumbnail_url) { %}
-          <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
-          {% } %}</td>
-        <td class="name">
-          <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
-        </td>
-        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-        <td colspan="2"></td>
-        {% } %}
-      <td class="delete">
-        <button class="uibutton large" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-          <i class="icon-trash icon-white"></i>
-          <span>{%=locale.fileupload.destroy%}</span>
-        </button>
-        <input type="checkbox" name="delete" value="1">
-      </td>
-    </tr>
-    {% } %}
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  $(function () {
-      // Initialize the jQuery File Upload widget:
-      $('#fileupload').fileupload();
-      // 
-      // Load existing files:
-      $.getJSON($('#fileupload').prop('action'), function (files) {
-        var fu = $('#fileupload').data('fileupload'), 
-          template;
-        fu._adjustMaxNumberOfFiles(-files.length);
-        console.log(files);
-        template = fu._renderDownload(files)
-          .appendTo($('#fileupload .files'));
-        // Force reflow:
-        fu._reflow = fu._transition && template.length &&
-          template[0].offsetWidth;
-        template.addClass('in');
-        $('#loading').remove();
-      });
-
-  });
-</script>

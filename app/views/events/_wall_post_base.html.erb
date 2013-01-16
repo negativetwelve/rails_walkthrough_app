@@ -1,8 +1,8 @@
-<%= link_to image_tag(event.user.profile_picture, size: '50x50'), event.user, class: 'user-picture' %>
-<div class="user-event-inner">
-  <div class="event-inner-wrapper">
-    <div class="main-event-content">
-      <h5><%= link_to event.user.name, event.user, class: 'event-user-name' %><i class="icon-caret-right"></i><%= link_to event.receiver.name, event.receiver, class: 'event-user-name' %></h5>
+<%= link_to image_tag(event.user.profile_picture, size: '50x50'), event.user, class: 'user_picture' %>
+<div class="user_event_inner">
+  <div class="event_inner_wrapper">
+    <div class="main_event_content">
+      <h5><%= link_to event.user.name, event.user, class: 'event_user_name' %><i class="icon-caret-right"></i><%= link_to event.receiver.name, event.receiver, class: 'event_user_name' %></h5>
       <%= render 'events/base', event: event %>
     </div>
   </div>

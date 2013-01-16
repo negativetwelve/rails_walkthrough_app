@@ -1,7 +1,7 @@
-<%= content_tag :li, class: "comment-wrapper #{'hidden' if event.comments.count == 0 && event.likes.count == 0}" do %>
-  <%= image_tag current_user.profile_picture, size: '32x32', class: 'comment-profile-picture' %>
+<%= content_tag :li, class: "comment_wrapper #{'hidden' if event.comments.count == 0 && event.likes.count == 0}" do %>
+  <%= image_tag current_user.profile_picture, size: '32x32', class: 'comment_profile_picture' %>
   <%= form_for Event.new, remote: true, html: {class: 'new_comment_form', id: "new_comment_form_#{event.id}"} do |f| %>
-    <%= f.text_area :body, placeholder: "Write a comment...", class: 'comment-input', data: {id: "#{event.id}"} %>
+    <%= f.text_area :body, placeholder: "Write a comment...", class: 'comment_input', data: {id: "#{event.id}"} %>
     <%= hidden_field_tag :kind, 'comment' %>
     <%= hidden_field_tag :parent_event_id, event.id %>
   <% end %>

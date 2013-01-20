@@ -22,8 +22,10 @@ class EventsController < ApplicationController
       case @event.kind
       when 'status'
         Pusher['news_feed'].trigger('new_status', {
-          :new_status => (render :partial => "events/feed/new_status", :locals => {:event => @event}),
-          :parent => "#feed-items"
+          :new_status_feed => (render_to_string :partial => "events/feed/new_status", :locals => {:event => @event}),
+          :feed => "#feed-items",
+          :new_status_ticker => (render_to_string :partial => "sidebar/event", :locals => {:item => @event}),
+          :ticker => "#ticker_list"
         })
       when 'comment'
         Pusher['news_feed'].trigger('new_comment', {
@@ -33,13 +35,14 @@ class EventsController < ApplicationController
         })
       when 'wall_post'
         Pusher['news_feed'].trigger('new_wall_post', {
-          :new_wall_post => (render :partial => "events/feed/new_wall_post", :locals => {:event => @event}),
-          :parent => "#feed-items"
+          :new_wall_post_feed => (render_to_string :partial => "events/feed/new_wall_post", :locals => {:event => @event}),
+          :feed => "#feed-items",
+          :new_wall_post_ticker => (render_to_string :partial => "sidebar/event", :locals => {:item => @event}),
+          :ticker => "#ticker_list"
         })
       end
-    else
-      render nothing: true
     end
+    render nothing: true
   end
   
   def load_comments

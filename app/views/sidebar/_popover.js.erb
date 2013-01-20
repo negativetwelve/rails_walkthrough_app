@@ -1,5 +1,5 @@
-$(".ticker_event").hover(
-  function(event) {
+$(document).on({
+  mouseenter: function(event) {
     var el = $(this);
     var id = $(this)[0].dataset.id;
     //el.unbind("hover");
@@ -17,8 +17,8 @@ $(".ticker_event").hover(
       }
     });
   },
-  function(event) {
-    //$(this).popover("hide");
+  mouseleave: function(event) {
+    $(this).popover("hide");
   }
-);
+}, ".ticker_event");
 

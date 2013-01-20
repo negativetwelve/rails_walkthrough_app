@@ -6,12 +6,14 @@
     var channel = pusher.subscribe('news_feed');
 
     channel.bind('new_status', function(data) {
-      $(data.new_status[0]).prependTo($(data.parent)).fadeIn('slow');
+      $(data.new_status_feed).prependTo($(data.feed)).fadeIn('slow');
+      $(data.new_status_ticker).prependTo($(data.ticker)).fadeIn('slow');
       $('abbr.timeago').timeago();
     });
     
     channel.bind('new_wall_post', function(data) {
-      $(data.new_wall_post[0]).prependTo($(data.parent)).fadeIn('slow');
+      $(data.new_wall_post_feed).prependTo($(data.feed)).fadeIn('slow');
+      $(data.new_wall_post_ticker).prependTo($(data.ticker)).fadeIn('slow');
       $('abbr.timeago').timeago();
     });
   

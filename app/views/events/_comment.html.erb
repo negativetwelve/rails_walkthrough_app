@@ -15,10 +15,10 @@
         <% if comment.likers.include?(current_user) %>
           <%= link_to_unlike_button(comment) %>
         <% else %>
-          <%= link_to_like_button(comment) %>
+          <%= link_to_like_button(comment, 'comment') %>
         <% end %>
       </span>
-      <%= content_tag :span, id: "comment_likes_parent_#{comment.id}" do %>
+      <%= content_tag :span, class: "comment_likes_parent_#{comment.id}" do %>
         <% if comment.likes.count != 0 %>      
           <%= render 'events/comment_like', comment: comment %>
         <% end %>

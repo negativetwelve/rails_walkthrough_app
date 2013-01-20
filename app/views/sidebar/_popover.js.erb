@@ -1,0 +1,24 @@
+$(".ticker_event").hover(
+  function(event) {
+    var el = $(this);
+    var id = $(this)[0].dataset.id;
+    //el.unbind("hover");
+    $.ajax({
+      url: "/events/" + id,
+      success: function(data) {
+        el.popover({
+          html: true,
+          content: data,
+          placement: 'left'
+        });
+        el.popover("show");
+        el.next().css({top: el.position().top});
+        $('abbr.timeago').timeago();
+      }
+    });
+  },
+  function(event) {
+    //$(this).popover("hide");
+  }
+);
+

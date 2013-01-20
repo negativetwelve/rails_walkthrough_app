@@ -1,0 +1,58 @@
+<div id="sidebar_wrapper">
+  <div id="sidebar_container">
+    <div id="realtime_ticker">
+      <div id="ticker_content">
+        <ul id="ticker_list">
+          <% current_user.ticker_feed.each do |item| %>
+          <%= render 'sidebar/event', item: item %>
+          <% end %>
+        </ul>
+      </div>
+      <div id="resizer" class="ui-resizable-handle"></div>
+      
+      <div id="ticker_item_popover"></div>
+      <script>
+        <%= render :partial => 'sidebar/popover', :formats => [:js] %>
+      </script>
+    </div>
+
+  
+    <div id="chat">
+      <%= render 'sidebar/chat', users: User.all %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var container = $("#sidebar_container").height();
+    $("#chat").css({ height: (container - $("#realtime_ticker").height() - $("#resizer").height()) / container * 100 + "%" });
+  });
+  
+  $(function(){
+    var container = $("#sidebar_container").height();
+    var ticker = $("#realtime_ticker").height();
+    var chat = $("#chat").height();
+    var resizer = $("#resizer").height();
+    
+    resize_function = function(event, ui) {
+      var current = ui.size.height;
+      $(this).css({ height: current / container * 100 + "%" });
+      $("#chat").css({ height: (container - current - resizer) / container * 100 + "%" });
+    }
+    
+    stop_function = function(event, ui) {
+      //ticker.css({height: ticker.height() / container.height() * 100 + "%"});
+    }
+
+    $($("#realtime_ticker")).resizable({
+      handles: {'s' : $("#resizer")},
+      maxHeight: $(window).height() - 100,
+      minHeight: 0,
+      minWidth: 205,
+      maxWidth: 205,
+      resize: resize_function,
+      stop: stop_function
+    });
+  });
+</script>

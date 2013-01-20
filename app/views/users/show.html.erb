@@ -20,7 +20,7 @@
       <div class="feed_items_all">
         <ul id="feed-items">
           <% @events.each do |event| %>
-          <%= render 'events/event', event: event %>
+          <%= render 'events/feed/event', event: event %>
         <% end %>
         </ul>
       </div>

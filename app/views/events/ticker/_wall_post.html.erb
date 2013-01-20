@@ -1,0 +1,7 @@
+<li class="ticker_event_box">
+  <%= render 'events/ticker/wall_post_base', event: event %>
+</li>
+
+<%= content_tag :ul, class: "comments_list comment-box-#{event.id}", data: {location: 'ticker'} do %>
+  <%= render 'events/comment_box', event: event, location: 'ticker' %>
+<% end %>

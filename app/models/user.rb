@@ -41,6 +41,23 @@ class User < ActiveRecord::Base
     photos.try(:first).try(:image).try(:url, :thumb_square) || "http://www.junction49.co.uk/public/styles/images/default_user_300x300.png"
   end
   
+  def ticker_feed
+    items = friends.collect{|friend| friend.wall_posts.without_events_by(self) + friend.liked_statuses + friend.comments_on_statuses}
+    items.flatten.sort_by(&:created_at).reverse!
+  end
+  
+  def wall_posts
+    Event.where(kind: 'wall_post', receiver_id: id)
+  end
+  
+  def liked_statuses
+    Like.where(kind: 'status', user_id: id)
+  end
+  
+  def comments_on_statuses
+    Event.where(kind: 'comment', user_id: id)
+  end
+  
   private
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64

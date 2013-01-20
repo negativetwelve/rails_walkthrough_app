@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116004535) do
+ActiveRecord::Schema.define(:version => 20130117224000) do
 
   create_table "events", :force => true do |t|
     t.text     "body",            :default => ""
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130116004535) do
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.integer  "receiver_id"
+    t.string   "parent_kind"
   end
 
   add_index "events", ["parent_event_id", "created_at"], :name => "index_events_on_parent_event_id_and_created_at"
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130116004535) do
     t.integer  "event_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "kind"
   end
 
   add_index "likes", ["event_id", "created_at"], :name => "index_likes_on_event_id_and_created_at"

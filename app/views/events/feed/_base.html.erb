@@ -9,10 +9,10 @@
     <% if event.likers.include?(current_user) %>
       <%= link_to_unlike_button(event) %>
     <% else %>
-      <%= link_to_like_button(event) %>
+      <%= link_to_like_button(event, 'feed') %>
     <% end %>
           
-    <%= link_to 'Comment', "#", onclick: "show_comment_box(#{event.id}); return false;" %>
+    <%= link_to 'Comment', "#", onclick: "show_comment_box(#{event.id}, 'feed'); return false;" %>
     <%= link_to 'Share', '#' %>
   </span>
   <span class="event-time">
@@ -21,27 +21,27 @@
 </span>
       
 <div class="event_comments">
-  <%= content_tag :ul, class: 'comments_list', id: "action_bar_of_#{event.id}" do %>
+  <%= content_tag :ul, class: "comments_list action_bar_of_#{event.id}" do %>
     <% if event.likes.count != 0 %>
       <%= render 'events/likes_bar', event: event %>
     <% end %>
           
     <% if event.comments.count > 4 %>
-      <%= content_tag :li, class: 'comment_wrapper', id: "show_more_comments_id_#{event.id}" do %>
+      <%= content_tag :li, class: "comment_wrapper show_more_comments_id_#{event.id}", data: {location: 'feed'} do %>
         <i class="icon-comments-alt"></i>
-        <%= link_to_more_comments(event, 0, 1) %>
-        <%= content_tag :span, "4 of #{event.comments.count}", class: "pull-right", id: "comments_of_id_#{event.id}_count" %>
+        <%= link_to_more_comments(event, 'feed', 0, 1) %>
+        <%= content_tag :span, "4 of #{event.comments.count}", class: "pull-right comments_of_id_#{event.id}_count", data: {location: 'feed'} %>
       <% end %>
     <% end %>
   <% end %>
           
-  <%= content_tag :ul, class: 'comments_list', id: "comments-of-#{event.id}" do %>
+  <%= content_tag :ul, class: "comments_list comments-of-#{event.id}", data: {location: 'feed'} do %>
     <% event.comments.last(4).each do |comment| %>
       <%= render 'events/comment', comment: comment %>
     <% end %>     
   <% end %>
         
-  <%= content_tag :ul, class: 'comments_list', id: "comment-box-#{event.id}" do %>
-    <%= render 'events/comment_box', event: event %>
+  <%= content_tag :ul, class: "comments_list comment-box-#{event.id}", data: {location: 'feed'} do %>
+    <%= render 'events/comment_box', event: event, location: 'feed' %>
   <% end %>
 </div>

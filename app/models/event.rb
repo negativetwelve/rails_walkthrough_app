@@ -17,7 +17,46 @@ class Event < ActiveRecord::Base
   
   accepts_nested_attributes_for :photos
   
+  scope :without_events_by, lambda{|user| where('user_id <> ?', user.id)}
+  
+  class << self
+
+  end
+  
   def is_comment?
     kind == 'comment'
   end
+  
+  def receiver?
+    !receiver.nil?
+  end
+  
+  def parent?
+    !parent_event.nil?
+  end
+  
+  def ticker_wall_post_text
+    body.length > 50 ? body[0, 50] + "..." : body
+  end
+  
+  def ticker_comment_text
+    body.length > 32 ? body[0, 32] + "..." : body
+  end
+  
+  def ownership_text(current_user)
+    if user == current_user
+      "your"
+    elsif receiver? && user == receiver
+      "his own"
+    elsif parent?
+      if parent_event.user == user
+        "his own"
+      else
+        parent_event.ownership_text(current_user)
+      end
+    else
+      user.name + "'s"
+    end
+  end 
+  
 end

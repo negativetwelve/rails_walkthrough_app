@@ -1,11 +1,11 @@
-$("#comments-of-<%= @event.id %>").prepend("<%= escape_javascript(render('events/comments', comments: @comments)) %>");
+$(".comments-of-<%= @event.id %>[data-location=<%= @location %>]").prepend("<%= escape_javascript(render('events/comments', comments: @comments)) %>");
 if (<%= @end %>) {
-  $("#show_more_comments_id_<%= @event.id %>").fadeOut('fast', function() { this.remove() });
+  $(".show_more_comments_id_<%= @event.id %>[data-location=<%= @location %>]").fadeOut('fast', function() { this.remove() });
 } else {
-  var curr_num = $("#comments_of_id_<%= @event.id %>_count")[0];
+  var curr_num = $(".comments_of_id_<%= @event.id %>_count[data-location=<%= @location %>]")[0];
   curr_num.innerHTML = parseInt(curr_num.innerHTML.split(" ")[0]) + <%= @per_page %> + " of " + <%= @event.comments.count %>;
 
-  var link = $("#load_more_id_<%= @event.id %>")[0];
+  var link = $(".load_more_id_<%= @event.id %>[data-location=<%= @location %>]")[0];
   link.innerHTML = "View previous comments";
   link.href = link.href.split('page=')[0] + "page=" + String(parseInt(link.href.split('page=')[1]) + 1);
 }

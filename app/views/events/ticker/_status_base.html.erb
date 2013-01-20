@@ -1,0 +1,12 @@
+<div class="ticker_top_user_content">
+  <%= link_to image_tag(event.user.profile_picture, size: '50x50'), event.user, class: 'ticker_user_picture' %>
+  <div class="ticker_user_event_inner">
+    <div class="ticker_event_inner_wrapper">
+      <div class="ticker_main_event_content">
+        <h5><%= link_to event.user.name, event.user, class: 'ticker_event_user_name' %></h5>
+        <%= render 'events/ticker/base', event: event %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'events/ticker/comments', event: event %>

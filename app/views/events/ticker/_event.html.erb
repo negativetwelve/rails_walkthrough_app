@@ -1,0 +1,6 @@
+<% case event.kind %>
+<% when 'status' %>
+  <%= render 'events/ticker/status', event: event %>
+<% when 'wall_post' %>
+  <%= render 'events/ticker/wall_post', event: event %>
+<% end %>

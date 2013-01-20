@@ -9,12 +9,11 @@ module ApplicationHelper
     request.fullpath == '/login'
   end
   
-  def link_to_like_button(event)
+  def link_to_like_button(event, location)
     link_to('Like',
-            event_like_path(event_id: event.id),
+            event_like_path(event_id: event.id, location: location),
             remote: true,
-            id: "comment_id_#{event.id}_like_button",
-            class: "comment_like_button",
+            class: "comment_like_button comment_id_#{event.id}_like_button",
             data: {id: event.id})
   end
   
@@ -22,13 +21,12 @@ module ApplicationHelper
     link_to('Unlike',
             event_unlike_path(event_id: event.id),
             remote: true,
-            id: "comment_id_#{event.id}_like_button",
-            class: "comment_like_button",
+            class: "comment_like_button comment_id_#{event.id}_like_button",
             data: {id: event.id})
   end
   
-  def link_to_more_comments(event, offset, page)
-    link_to("View all #{event.comments.count} comments", {controller: 'events', action: 'load_comments', offset: offset, page: page, event_id: event.id}, remote: true, id: "load_more_id_#{event.id}")
+  def link_to_more_comments(event, location, offset, page)
+    link_to("View all #{event.comments.count} comments", {controller: 'events', action: 'load_comments', location: location, offset: offset, page: page, event_id: event.id}, remote: true, class: "load_more_id_#{event.id}", data: {location: location})
   end
   
 end

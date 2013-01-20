@@ -5,6 +5,7 @@ $light_blue: #D8DFEA;
 $highlight_blue: #D8DFEA;
 $icon_blue: #1C2F79;
 $comment_blue: #F1F2F6;
+$sidebar_blue: #F1F2F6;
 $white: #ffffff;
 $transparent_white: rgba(255, 255, 255, 0.25);
 $black_text: #222222;
@@ -23,6 +24,7 @@ $navbarLinkBackgroundHover: $transparent_white;
 $dropdownLinkBackgroundHover: $medium_blue;
 
 $home_page_column_padding: 20px;
+$main_content_width: 511px;
 
 @import "bootstrap";
 
@@ -62,12 +64,12 @@ abbr[title] {
   display: none;
 }
 
-.full_width {
-  width: 100%;
-}
-
-.fl {
-  float: left;
+.clear::after {
+  clear: both;
+  content: ".";
+  display: block;
+  line-height: 0;
+  visibility: hidden;
 }
 
 input[type=text], input[type=password], textarea {
@@ -201,6 +203,8 @@ input[type=text], input[type=password], textarea {
             .event_content {
               font-size: 13px;
               line-height: 1.38;
+              word-break: break-word;
+              word-wrap: break-word;
             }
             
             .action_bar {
@@ -265,6 +269,262 @@ input[type=text], input[type=password], textarea {
   }
 }
 
+.popover {
+  left: -383px !important;
+  width: 378px !important;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  
+  .arrow {
+    top: 0 !important;
+    margin-top: 15px !important;
+  }
+  
+  .popover-inner {
+    width: 378px !important;
+    
+    .popover-title {
+      display: none !important;
+    }
+    
+    .popover-content {
+      padding: 0;
+      
+      .ticker_event_box {
+        max-height: 450px;
+        overflow-y: scroll;
+        list-style: none;
+        padding-left: 18px;
+        margin-left: -18px;
+        border-bottom: 1px solid $gray_border;
+      
+        .ticker_top_user_content {
+          padding: 10px;
+        
+          .ticker_user_picture {
+            float: left;
+            margin-bottom: 16px;
+          }
+      
+          .ticker_user_event_inner {
+            margin-left: 60px;
+            display: block;
+            min-height: 65px;
+        
+            .ticker_event_inner_wrapper {
+          
+              .ticker_main_event_content {
+                display: block;
+            
+                h5 {
+                  font-size: 11px;
+                  line-height: 1.28;
+                  font-weight: normal;
+                  margin: 0 0 5px 0;
+                }
+            
+                .ticker_event_content {
+                  font-size: 11px;
+                  line-height: 1.28;
+                  word-break: break-word;
+                  word-wrap: break-word;
+                }
+            
+                .ticker_action_bar {
+                  font-size: 11px;
+                  line-height: 1.28;
+                }
+            
+                .ticker_event_user_name {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+        
+        .ticker_event_comments {
+          .ticker_comments_list {
+            margin: 0px;
+                
+            .comment_wrapper {
+              background-color: $comment_blue;
+              list-style: none;
+              padding: 4px;
+              margin-top: 1px;
+              font-size: 11px;
+                  
+              .comment_profile_picture {
+                float: left;
+                margin-right: 8px;
+              }
+                  
+              .comment_content {
+                overflow: hidden;
+                display: block;
+                    
+                .comment_user_name {
+                  font-weight: bold;
+                }
+              }
+                  
+              .comment_input {
+                resize: none;
+                height: 20px;
+                font-size: 11px;
+                line-height: 1.28;
+              }
+                  
+              .comment_actions {
+                margin-top: 2px;
+              }
+                  
+              form.new_comment_form {
+                margin: 0;
+                    
+                #event_body {
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      .comments_list {
+        margin: 0px;
+                
+        .comment_wrapper {
+          background-color: $comment_blue;
+          list-style: none;
+          padding: 4px;
+          margin-top: 1px;
+          font-size: 11px;
+                  
+          .comment_profile_picture {
+            float: left;
+            margin-right: 8px;
+          }
+                  
+          .comment_content {
+            overflow: hidden;
+            display: block;
+                    
+            .comment_user_name {
+              font-weight: bold;
+            }
+          }
+                  
+          .comment_input {
+            resize: none;
+            height: 20px;
+            font-size: 11px;
+            line-height: 1.28;
+          }
+                  
+          .comment_actions {
+            margin-top: 2px;
+          }
+                  
+          form.new_comment_form {
+            margin: 0;
+                    
+            #event_body {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#super_container {
+  @media screen and (max-width: 1185px) {
+    #sidebar_wrapper {
+      display: none;
+    }
+  }
+  
+  #sidebar_wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 205px;
+    height: 100%;
+    z-index: 10000;
+    background-color: $sidebar_blue;
+    border-left: 1px solid rgba(0, 0, 0, .4);
+    -webkit-box-shadow: inset 2px 0 2px -2px #b2b9c9;
+    
+    #sidebar_container {
+      height: 100%;
+    }
+    
+    #realtime_ticker {
+      width: 100%;
+      position: relative;
+      height: 50%;
+      
+      #ticker_content {
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        
+        #ticker_list {
+          list-style: none;
+          margin: 0;
+          
+          .ticker_event {
+            padding: 6px 14px 6px 2px;
+            border-top: 1px solid $gray_border;
+            
+            .user_picture {
+              margin-left: 3px;
+              margin-right: 8px;
+              float: left;
+            }
+            
+            .ticker_main_content {
+              display: table-cell;
+              vertical-align: top;
+              
+              .user_names {
+                font-weight: bold;
+              }
+              
+              .event_text {
+                word-break: break-word;
+                word-wrap: break-word;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    #resizer {
+      height: 8px;
+      background-color: blue;
+      width: 100%;
+      z-index: 9999;
+      position: relative;
+      cursor: ns-resize;
+    }
+    
+    #chat {
+      width: 100%;
+      position: relative;
+      padding-top: 8px;
+    }
+  }
+  
+  .has_sidebar {
+    padding-right: 205px;
+  }
+}
+
 .has_header {
   padding-top: 37px;
 }
@@ -294,15 +554,17 @@ input[type=text], input[type=password], textarea {
   padding-top: $home_page_column_padding;
   width: 799px;
   margin-left: 181px;
+  margin-bottom: 20px;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   min-height: 700px;
   font-size: 13px;
   
   #main_content {
     padding-left: 18px;
     padding-right: 25px;
-    width: 511px;
+    width: $main_content_width;
     float: left;
   
     #home_page_update {    
@@ -313,6 +575,7 @@ input[type=text], input[type=password], textarea {
           line-height: 1.28;
           height: 16px;
           padding: 7px 5px 5px 5px;
+          width: $main_content_width;
         }
       }
     }

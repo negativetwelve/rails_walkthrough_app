@@ -1,0 +1,21 @@
+<div class="ticker_event_comments">
+  <%= content_tag :ul, class: "ticker_comments_list action_bar_of_#{event.id}" do %>
+    <% if event.likes.count != 0 %>
+      <%= render 'events/likes_bar', event: event %>
+    <% end %>
+          
+    <% if event.comments.count > 4 %>
+      <%= content_tag :li, class: "comment_wrapper show_more_comments_id_#{event.id}", data: {location: 'ticker'} do %>
+        <i class="icon-comments-alt"></i>
+        <%= link_to_more_comments(event, 'ticker', 0, 1) %>
+        <%= content_tag :span, "4 of #{event.comments.count}", class: "pull-right comments_of_id_#{event.id}_count", data: {location: 'ticker'} %>
+      <% end %>
+    <% end %>
+  <% end %>
+          
+  <%= content_tag :ul, class: "ticker_comments_list comments-of-#{event.id}", data: {location: 'ticker'} do %>
+    <% event.comments.last(4).each do |comment| %>
+      <%= render 'events/comment', comment: comment %>
+    <% end %>     
+  <% end %>
+</div>

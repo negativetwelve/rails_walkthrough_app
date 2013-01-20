@@ -1,0 +1,6 @@
+<span class="user_names">
+  <%= event.user.name %>
+</span>
+<span class="event_text">
+  commented on <%= event.ownership_text(current_user) %> <%= event.parent_kind %>: "<%= event.ticker_comment_text %>"
+</span>

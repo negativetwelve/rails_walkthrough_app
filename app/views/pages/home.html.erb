@@ -26,10 +26,14 @@
     
     channel.bind('new_status_like', function(data) {
       if (data.count == 1) {
-        $(data.likes_bar).prependTo($(data.ul)).fadeIn('slow');
-        show_comment_box(data.event_id);
+        $.each($(data.ul), function() {
+           $(data.likes_bar).prependTo(this).fadeIn('slow');
+        });
+        show_comment_box(data.event_id, data.location);
       } else {
-        $(data.selected_event)[0].innerHTML = String(parseInt($(data.selected_event)[0].innerHTML.split(' ')[0]) + 1) + ' people like this.';
+        $.each($(data.selected_event), function() {
+           this.innerHTML = String(parseInt(this.innerHTML.split(' ')[0]) + 1) + ' people like this.';
+        });
       }
     });
     
@@ -37,9 +41,13 @@
       if (data.count == 0) {
         $(data.likes_bar).fadeOut('fast', function() { $(data.likes_bar).remove() });
       } else if (data.count == 1) {
-        $(data.selected_event)[0].innerHTML = '1 person likes this.';
+        $.each($(data.selected_event), function() {
+          this.innerHTML = '1 person likes this.';
+        });
       } else {
-        $(data.selected_event)[0].innerHTML = String(parseInt($(data.selected_event)[0].innerHTML.split(' ')[0]) - 1) + ' people like this.';
+        $.each($(data.selected_event), function() {
+          this.innerHTML = String(parseInt(this.innerHTML.split(' ')[0]) - 1) + ' people like this.';
+        });
       }
     });
     
@@ -47,7 +55,9 @@
       if (data.count == 1) {
         $(data.thumbs_up).prependTo($(data.parent)).fadeIn('slow');
       } else {
-        $(data.selected_event)[0].innerHTML = parseInt($(data.selected_event)[0].innerHTML) + 1;
+        $.each($(data.selected_event), function() {
+          this.innerHTML = parseInt(this.innerHTML) + 1;
+        });
       }
     });
     
@@ -55,7 +65,9 @@
       if (data.count == 0) {
         $(data.thumbs_up).fadeOut('fast', function() { $(data.thumbs_up).remove() });
       } else {
-        $(data.selected_event)[0].innerHTML = parseInt($(data.selected_event)[0].innerHTML) - 1;
+        $.each($(data.selected_event), function() {
+          this.innerHTML = parseInt(this.innerHTML) - 1;
+        });
       }
     });
     
@@ -89,7 +101,7 @@
       
           <div class="update_form" id="status_update_form">
             <%= form_for Event.new, remote: true do |f| %>
-              <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", id: 'new_status', class: 'full_width' %>
+              <%= f.text_area :body, placeholder: "What's up, #{current_user.first_name}?", onfocus: "show_status_submit()", id: 'new_status' %>
               <%= hidden_field_tag :kind, 'status' %>
               <%= button_tag "Post", class: "uibutton confirm large hidden", id: "status_submit_button" %>
             <% end %>
@@ -106,16 +118,18 @@
         <div class="feed_items_all">
           <ul id="feed-items">
           <% @events.each do |event| %>
-            <%= render 'events/event', event: event %>
+          <%= render 'events/feed/event', event: event %>
           <% end %>
           </ul>
-          <div class="pagination pagination-centered">
-            <%= will_paginate @events %>
-          </div>
         </div>
+        
       </div>
-    </div>
     
+      <div class="pagination pagination-centered">
+        <%= will_paginate @events %>
+      </div>
+      
+    </div>
   </div>
 </div>
 <% else %>

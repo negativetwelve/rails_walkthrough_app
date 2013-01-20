@@ -1,0 +1,23 @@
+<%= content_tag :li, class: 'ticker_event', data: { class: item.class.to_s.downcase, id: item.id, kind: item.kind } do %>
+  <div class="clear">
+    <div class="user_picture">
+      <%= user_profile_picture_tag(item.user, 28) %>
+    </div>
+    <div class="ticker_main_content">
+      <% case item.class.to_s %>
+      <% when 'Event' %>
+        <% case item.kind %>
+        <% when 'wall_post' %>
+          <%= render 'sidebar/events/wall_post', event: item %>
+        <% when 'comment' %>
+          <%= render 'sidebar/events/comment', event: item %>
+        <% end %>
+      <% when 'Like' %>
+        <% case item.kind %>
+        <% when 'status' %>
+          <%= render 'sidebar/events/like_status', like: item %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

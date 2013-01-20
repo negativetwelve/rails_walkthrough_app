@@ -3,7 +3,7 @@ $(document).ready(function() {
   $('.comment_input').live("keydown", function(e) {
     if (e.keyCode == 13 && !e.shiftKey) {
       if (this.value.match("^\\s*$") == null) {
-        var parent = '#new_comment_form_' + $(this).data('id');
+        var parent = '.new_comment_form_' + $(this).data('id') + '[data-location=' + $(this).data('location') + ']';
         $(parent).submit();
         e.preventDefault();
         this.value = '';
@@ -18,15 +18,19 @@ $(document).ready(function() {
   });
   
   $('.comment_like_button').live("ajax:success", function(event, xhr, status) {
-    var like_button = "#comment_id_" + String(this.dataset.id) + "_like_button";
+    var like_button = ".comment_id_" + String(this.dataset.id) + "_like_button";
     var word;
     if (this.text == "Unlike") {
       word = "Like";
     } else {
       word = "Unlike";
     }
-    $(like_button)[0].innerHTML = word;
-    $(like_button)[0].href = '/events/' + String(this.dataset.id) + '/' + word.toLowerCase();
+    $.each($(like_button), function() {
+      this.innerHTML = word;
+    });
+    $.each($(like_button), function() {
+      this.href = '/events/' + String(this.dataset.id) + '/' + word.toLowerCase();
+    });
   });
   
 });
@@ -45,8 +49,8 @@ function show_status_submit() {
   $('#status_submit_button').show();
 };
 
-function show_comment_box(event_id) {
-  var comment_box = "#comment-box-" + event_id + " .comment_wrapper";
+function show_comment_box(event_id, location) {
+  var comment_box = ".comment-box-" + event_id + "[data-location=" + location + "] .comment_wrapper";
   $(comment_box).fadeIn('fast');
   $(comment_box + " #event_body").focus();
 };

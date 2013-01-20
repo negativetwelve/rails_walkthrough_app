@@ -1,6 +1,6 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container">
+    <div class="container <%= 'has_sidebar' if signed_in? %>">
       <%= link_to 'Rails Walkthrough', root_path, class: "brand" %>
       <% if signed_in? %>
       <ul class="nav">

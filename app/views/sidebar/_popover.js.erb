@@ -1,3 +1,9 @@
+var timer;
+
+function hide_popover(element) {
+  element.popover('hide');
+}
+
 $(document).on({
   mouseenter: function(event) {
     var el = $(this);
@@ -11,6 +17,8 @@ $(document).on({
           content: data,
           placement: 'left'
         });
+        clearTimeout(timer);
+        $(".popover").hide();
         el.popover("show");
         el.next().css({top: el.position().top});
         $('abbr.timeago').timeago();
@@ -18,7 +26,21 @@ $(document).on({
     });
   },
   mouseleave: function(event) {
-    $(this).popover("hide");
+    var element = this;
+    timer = setTimeout(function() {
+      hide_popover($(element));
+    }, 300);                 
   }
 }, ".ticker_event");
 
+$(document).on({
+  mouseenter: function(event) {
+    clearTimeout(timer);
+  },
+  mouseleave: function(event) {
+    var element = this;
+    timer = setTimeout(function() {
+      hide_popover($(element).prev());
+    }, 300);     
+  }
+}, ".popover");

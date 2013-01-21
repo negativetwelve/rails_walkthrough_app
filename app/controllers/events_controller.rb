@@ -24,7 +24,7 @@ class EventsController < ApplicationController
         Pusher['news_feed'].trigger('new_status', {
           :new_status_feed => (render_to_string :partial => "events/feed/new_status", :locals => {:event => @event}),
           :feed => "#feed-items",
-          :new_status_ticker => (render_to_string :partial => "sidebar/event", :locals => {:item => @event}),
+          :new_status_ticker => (render_to_string :partial => "sidebar/event", :locals => {:item => @event, hidden: true}),
           :ticker => "#ticker_list"
         })
       when 'comment'
@@ -37,7 +37,7 @@ class EventsController < ApplicationController
         Pusher['news_feed'].trigger('new_wall_post', {
           :new_wall_post_feed => (render_to_string :partial => "events/feed/new_wall_post", :locals => {:event => @event}),
           :feed => "#feed-items",
-          :new_wall_post_ticker => (render_to_string :partial => "sidebar/event", :locals => {:item => @event}),
+          :new_wall_post_ticker => (render_to_string :partial => "sidebar/event", :locals => {:item => @event, hidden: true}),
           :ticker => "#ticker_list"
         })
       end

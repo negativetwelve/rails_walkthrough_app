@@ -4,7 +4,7 @@
       <div id="ticker_content">
         <ul id="ticker_list">
           <% current_user.ticker_feed.each do |item| %>
-          <%= render 'sidebar/event', item: item %>
+          <%= render 'sidebar/event', item: item, hidden: false %>
           <% end %>
         </ul>
       </div>

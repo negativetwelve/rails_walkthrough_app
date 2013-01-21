@@ -1,4 +1,4 @@
-<%= content_tag :li, class: 'ticker_event', data: { class: item.class.to_s.downcase, id: item.id, kind: item.kind } do %>
+<%= content_tag :li, class: "ticker_event#{' hidden' if hidden}", data: { class: item.class.to_s.downcase, id: item.id, kind: item.kind } do %>
   <div class="clear">
     <div class="user_picture">
       <%= user_profile_picture_tag(item.user, 28) %>
